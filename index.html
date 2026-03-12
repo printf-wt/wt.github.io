@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>个人博客-王腾</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="introduction">
+        <div class="left-column">
+            <img src="images/image_self.jpg" alt="个人头像" width="200" height="200">
+        </div>
+        <div class="right-column">
+            <p>个人信息</p>
+            <p>姓名：王腾</p>
+            <p>年龄：20岁</p>
+            <p>学历：本科</p>
+            <p>专业：计算机科学与技术</p>
+            <p>院校：中南林业科技大学计算机与数学学院</p>
+        </div>
+    </div>
+    <nav id="daohang">
+        <!-- 点击按钮时调用 JavaScript 函数，显示对应的内容区域 -->
+        <button onclick="showSection('education')">学历信息</button>
+        <button onclick="showSection('awards')">获奖经历</button>
+        <button onclick="showSection('research')">科研经历</button>
+        <button onclick="showSection('contact')">联系方式</button>
+        <button onclick="showSection('sharing')">经验分享</button>
+    </nav>
+
+    <!-- 学历信息内容区域，默认隐藏 -->
+    <section id="education">
+        <h2>学历信息</h2>
+        <p>小学：后白河完全小学</p>
+        <p>初中：卫辉市第八中学</p>
+        <p>高中：卫辉市第一中学</p>
+        <p>大学：中南林业科技大学计算机与数学学院</p>
+    </section>
+
+    <!-- 获奖经历内容区域，默认隐藏 -->
+    <section id="awards">
+        <h2>获奖经历</h2>
+        <p>2025年1月，获得软件创新大赛省级三等奖</p>
+        <p>2025年12月，获得校级优秀学生甲等奖学金</p>
+        <p>2025年12月，获得校级优秀学生干部</p>
+        <p>2025年12月，获得国家励志奖学金。</p>
+        <p>2025年12月，获得全国大学生数学建模竞赛湖南省二等奖。</p>
+    </section>
+
+    <!-- 科研经历内容区域，默认隐藏 -->
+    <section id="research">
+        <h2>科研经历</h2>
+        <p>2026年2月，发表《基于朋友圈可见性变化的学术社交关系网络断裂机制研究》于《joker of academic》</p>
+        <p>2026年3月，发表《小猪佩奇 vs 猪猪侠烹饪对比应用研究：基于跨IP对照建 模的虚拟角色食品工程玄学分析》于《joker of academic》</p>
+    </section>
+    <section id="contact">
+        <h2>联系方式</h2>
+        <p>邮箱：wangteng@scuft.edu.cn</p>
+        <p>电话：17673680052</p>
+    </section>
+
+    <!-- 经验分享：用于放日常心得/学习笔记，结构用 article，后续扩展只要复制一份 article 即可 -->
+    <section id="sharing">
+        <h2>经验分享</h2>
+
+        <!-- posts 容器：未来可以放很多篇心得文章 -->
+        <div class="posts">
+            <!-- 一篇心得文章（示例 1） -->
+            <article class="post">
+                <h3 class="post-title">学习笔记：如何高效写实验报告</h3>
+                <p class="post-meta">时间：2026-03-11｜关键词：学习方法 / 写作</p>
+                <div class="post-content">
+                    <p>这里写你的日常心得，例如：先列提纲、再补数据、最后统一排版；把结论放在最前面，让读者先看到结果。</p>
+                </div>
+            </article>
+
+            <!-- 一篇心得文章（示例 2） -->
+            <article class="post">
+                <h3 class="post-title">踩坑记录：第一次做项目怎么分工</h3>
+                <p class="post-meta">时间：2026-03-10｜关键词：项目协作 / 复盘</p>
+                <div class="post-content">
+                    <p>这里可以写：任务拆分、每日同步、代码规范、版本管理等。后续你只需要复制这个 article 再改内容即可。</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+
+
+    <!-- JavaScript 脚本，用于切换内容区域的显示和隐藏 -->
+    <script>
+        (function enforceLogin() {
+            try {
+                if (localStorage.getItem('loggedIn') !== '1') {
+                    window.location.href = 'login.html';
+                }
+            } catch (e) {
+                // 如果浏览器禁用 localStorage，则不做强制跳转
+            }
+        })();
+
+        function showSection(sectionId) {
+            // 隐藏所有内容区域
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'none';
+            });
+            // 显示被点击按钮对应的内容区域
+            document.getElementById(sectionId).style.display = 'block';//显示被选中的目标区域
+        }
+    </script>
+</body>
+</html>

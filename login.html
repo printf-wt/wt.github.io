@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <main class="login-page">
+        <div class="login-card" role="dialog" aria-modal="true" aria-labelledby="login-title">
+            <h1 id="login-title">登录</h1>
+            <p class="login-tip">请输入账号与密码登录</p>
+
+            <form id="login-form" class="login-form">
+                <label class="login-label" for="login-username">用户名</label>
+                <input id="login-username" name="username" class="login-input" type="text" autocomplete="username" required>
+
+                <label class="login-label" for="login-password">密码</label>
+                <input id="login-password" name="password" class="login-input" type="password" autocomplete="current-password" required>
+
+                <p id="login-error" class="login-error" role="alert" aria-live="polite"></p>
+
+                <button class="login-button" type="submit">进入主页</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        (function initLogin() {
+            const form = document.getElementById('login-form');
+            const usernameInput = document.getElementById('login-username');
+            const passwordInput = document.getElementById('login-password');
+            const errorEl = document.getElementById('login-error');
+
+            const VALID_USERNAME = '17673680052';
+            const VALID_PASSWORD = 'wangteng20051215';
+
+            function setError(message) {
+                errorEl.textContent = message || '';
+            }
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                setError('');
+
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value;
+
+                if (!username || !password) {
+                    setError('请输入用户名和密码');
+                    return;
+                }
+
+                if (username !== VALID_USERNAME || password !== VALID_PASSWORD) {
+                    setError('账号或密码错误');
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                    return;
+                }
+
+                try {
+                    localStorage.setItem('loggedIn', '1');
+                } catch (e) {
+                    // localStorage 不可用时也允许进入
+                }
+
+                window.location.href = 'index.html';
+            });
+
+            usernameInput.focus();
+        })();
+    </script>
+</body>
+</html>
