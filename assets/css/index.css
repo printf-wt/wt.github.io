@@ -88,8 +88,8 @@ body {
 }
 
 .login-button {
-    background-color: #444;
-    color: white;
+    background-color: #09b5ef4b;
+    color: rgb(0, 0, 0);
     border: none;
     padding: 10px 16px;
     cursor: pointer;
@@ -100,4 +100,10 @@ body {
 
 .login-button:hover {
     background-color: #555;
+}
+
+.login-register {
+    color: #333;
+    font-size: 13px;
+    text-decoration: underline;
 }

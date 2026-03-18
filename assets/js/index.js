@@ -6,9 +6,23 @@
 
     const VALID_USERNAME = '17673680052';
     const VALID_PASSWORD = 'wangteng20051215';
+    const STORAGE_KEY = 'registeredUser';
 
     function setError(message) {
         errorEl.textContent = message || '';
+    }
+
+    function getRegisteredUser() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return null;
+            const parsed = JSON.parse(raw);
+            if (!parsed || typeof parsed !== 'object') return null;
+            if (typeof parsed.username !== 'string' || typeof parsed.password !== 'string') return null;
+            return { username: parsed.username, password: parsed.password };
+        } catch (e) {
+            return null;
+        }
     }
 
     form.addEventListener('submit', (e) => {
@@ -23,7 +37,11 @@
             return;
         }
 
-        if (username !== VALID_USERNAME || password !== VALID_PASSWORD) {
+        const registered = getRegisteredUser();
+        const expectedUsername = registered ? registered.username : VALID_USERNAME;
+        const expectedPassword = registered ? registered.password : VALID_PASSWORD;
+
+        if (username !== expectedUsername || password !== expectedPassword) {
             setError('账号或密码错误');
             passwordInput.value = '';
             passwordInput.focus();

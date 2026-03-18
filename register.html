@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>注册</title>
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/background.css">
+    <link rel="stylesheet" href="assets/css/register.css">
+</head>
+<body class="container">
+    <main class="login-page">
+        <div class="login-card" role="dialog" aria-modal="true" aria-labelledby="register-title">
+            <h1 id="register-title" class="register-title">注册</h1>
+            <p class="login-tip">请填写注册信息</p>
+
+            <form id="register-form" class="login-form">
+                <label class="login-label" for="reg-username">账号</label>
+                <input id="reg-username" name="username" class="login-input" type="text" autocomplete="username" required>
+
+                <label class="login-label" for="reg-password">密码</label>
+                <input id="reg-password" name="password" class="login-input" type="password" autocomplete="new-password" required>
+
+                <fieldset class="register-fieldset">
+                    <legend class="register-legend">性别</legend>
+                    <label class="register-option"><input type="radio" name="gender" value="男" required> 男</label>
+                    <label class="register-option"><input type="radio" name="gender" value="女" required> 女</label>
+                </fieldset>
+
+                <fieldset class="register-fieldset">
+                    <legend class="register-legend">兴趣爱好</legend>
+                    <label class="register-option"><input type="checkbox" name="hobbies" value="瓦"> 瓦</label>
+                    <label class="register-option"><input type="checkbox" name="hobbies" value="洲"> 洲</label>
+                    <label class="register-option"><input type="checkbox" name="hobbies" value="LOL"> LOL</label>
+                    <label class="register-option"><input type="checkbox" name="hobbies" value="CS"> CS</label>
+                </fieldset>
+
+                <label class="register-agreement">
+                    <input id="reg-agree" type="checkbox">
+                    我已阅读并同意《用户协议》
+                </label>
+
+                <p id="register-error" class="login-error" role="alert" aria-live="polite"></p>
+
+                <button id="register-submit" class="login-button" type="submit" disabled>注册</button>
+                <a class="register-back" href="index.html">返回登录</a>
+            </form>
+        </div>
+    </main>
+
+    <script src="assets/js/register.js" defer></script>
+</body>
+</html>
