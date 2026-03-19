@@ -1,0 +1,5 @@
+/* sharing.html 覆盖：让页面内容默认显示 */
+
+#sharing {
+    display: block;
+}

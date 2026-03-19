@@ -1,0 +1,87 @@
+/* 照片墙：3D 环形 + 拖动旋转 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    perspective: 1200px;
+    overflow: hidden;
+    padding-top: 64px; /* 预留给 fixed 导航栏，避免遮挡内容 */
+}
+
+.stage {
+    width: min(1100px, 92vw);
+    height: min(720px, calc(86vh - 64px));
+    display: grid;
+    place-items: center;
+    transform-style: preserve-3d;
+}
+
+.ring {
+    --count: 1;
+    --radius: 420px;
+    --tilt: -10deg;
+    --rotation: 0deg;
+
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateX(var(--tilt)) rotateY(var(--rotation));
+
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+}
+
+.ring.is-dragging {
+    cursor: grabbing;
+}
+
+.ring .item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(260px, 42vw);
+    height: min(260px, 42vw);
+    transform-style: preserve-3d;
+
+    transform:
+        translate(-50%, -50%)
+        rotateY(calc(var(--i) * (360deg / var(--count))))
+        translateZ(var(--radius));
+
+    transition: transform 0.25s ease, filter 0.25s ease;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0002);
+}
+
+.ring .item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.ring .item:hover {
+    filter: drop-shadow(0 0 22px #000);
+    transform:
+        translate(-50%, -50%)
+        rotateY(calc(var(--i) * (360deg / var(--count))))
+        translateZ(calc(var(--radius) + 20px))
+        scale(1.06);
+}
+
+@media (max-width: 520px) {
+    .ring {
+        --radius: 320px;
+        --tilt: -6deg;
+    }
+}

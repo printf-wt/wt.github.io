@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <title>个人博客-王腾</title>
     <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/background.css">
 </head>
-<body class="container">
+<body class="background">
     <div class="introduction">
         <div class="left-column">
             <img src="assets/img/image_self.jpg" alt="个人头像" width="200" height="200">
@@ -20,12 +21,12 @@
         </div>
     </div>
     <nav id="daohang">
-        <!-- 点击按钮时调用 JavaScript 函数，显示对应的内容区域 -->
-        <button onclick="showSection('education')">学历信息</button>
-        <button onclick="showSection('awards')">获奖经历</button>
-        <button onclick="showSection('research')">科研经历</button>
-        <button onclick="showSection('contact')">联系方式</button>
-        <button onclick="showSection('sharing')">经验分享</button>
+        <a href="#education" data-section="education">学历信息</a>
+        <a href="#awards" data-section="awards">获奖经历</a>
+        <a href="#research" data-section="research">科研经历</a>
+        <a href="#contact" data-section="contact">联系方式</a>
+        <a href="sharing.html">经验分享</a>
+        <a href="photowall.html" target="_self">照片墙</a>
     </nav>
 
     <!-- 学历信息内容区域，默认隐藏 -->
@@ -58,35 +59,7 @@
         <p>邮箱：wangteng@scuft.edu.cn</p>
         <p>电话：17673680052</p>
     </section>
-
-    <!-- 经验分享：用于放日常心得/学习笔记，结构用 article，后续扩展只要复制一份 article 即可 -->
-    <section id="sharing">
-        <h2>经验分享</h2>
-
-        <!-- posts 容器：未来可以放很多篇心得文章 -->
-        <div class="posts">
-            <!-- 一篇心得文章（示例 1） -->
-            <article class="post">
-                <h3 class="post-title">学习笔记：如何高效写实验报告</h3>
-                <p class="post-meta">时间：2026-03-11｜关键词：学习方法 / 写作</p>
-                <div class="post-content">
-                    <p>这里写你的日常心得，例如：先列提纲、再补数据、最后统一排版；把结论放在最前面，让读者先看到结果。</p>
-                </div>
-            </article>
-
-            <!-- 一篇心得文章（示例 2） -->
-            <article class="post">
-                <h3 class="post-title">踩坑记录：第一次做项目怎么分工</h3>
-                <p class="post-meta">时间：2026-03-10｜关键词：项目协作 / 复盘</p>
-                <div class="post-content">
-                    <p>这里可以写：任务拆分、每日同步、代码规范、版本管理等。后续你只需要复制这个 article 再改内容即可。</p>
-                </div>
-            </article>
-        </div>
-    </section>
-
-
-
+    <script src="assets/js/auth.js" defer></script>
     <script src="assets/js/home.js" defer></script>
 </body>
 
