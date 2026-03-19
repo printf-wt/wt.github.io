@@ -14,28 +14,29 @@ body {
     top: 0; /* 距离页面顶部 0 像素 */
     left: 0; /* 贴齐左侧 */
     width: 100%; /* 占满整个页面宽度 */
-    background-color: #ffffff4b; /* 设置背景颜色为深灰色 */
+    background-color: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(10px);
     display: flex; /* 使用弹性布局 */
     justify-content: center; /* 水平居中对齐按钮 */
     flex-wrap: wrap; /* 按钮多了以后自动换行（更适合扩展） */
     gap: 8px; /* 用 gap 控制按钮间距（比 margin 更稳定） */
     padding: 10px 0; /* 设置上下内边距为 10 像素 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
     z-index: 1000; /* 让导航栏层级更高，避免被内容遮住 */
 }
 
 /* 导航按钮/链接样式 */
 #daohang button,
 #daohang a {
-    background-color: #09b5ef4b; /* 设置按钮背景颜色为稍浅的灰色 */
-    color: rgb(255, 255, 255); /* 设置按钮文字颜色为白色 */
-    border: none; /* 去除按钮边框 */
+    background-color: rgba(255, 255, 255, 0.85);
+    color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     padding: 10px 20px; /* 设置按钮内边距 */
     margin: 0; /* 间距交给 nav 的 gap 控制 */
     cursor: pointer; /* 鼠标悬停时显示手型光标 */
     font-size: 16px; /* 设置字体大小 */
     border-radius: 5px; /* 设置按钮圆角 */
-    transition: background-color 0.3s; /* 添加背景颜色渐变效果 */
+    transition: background-color 0.25s, border-color 0.25s;
     text-decoration: none; /* 去除链接下划线 */
     display: inline-block; /* 让 a 的 padding 生效更稳定 */
     z-index: 1001; /* 确保按钮层级高于导航栏背景 */
@@ -44,7 +45,8 @@ body {
 /* 鼠标悬停时按钮/链接的样式 */
 #daohang button:hover,
 #daohang a:hover {
-    background-color: #0165fa; /* 鼠标悬停时背景颜色变深 */
+    background-color: rgba(9, 181, 239, 0.18);
+    border-color: rgba(9, 181, 239, 0.35);
 }
 
 /* 内容区域样式 */

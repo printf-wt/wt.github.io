@@ -1,0 +1,304 @@
+/* 登录页：左侧卡通互动 + 右侧表单（仅影响 index.html） */
+
+.login-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  position: relative;
+  z-index: 9999;
+}
+
+.login-left {
+  display: none;
+  position: relative;
+  overflow: hidden;
+  padding: 48px;
+  color: #333;
+  background: linear-gradient(
+    135deg,
+    rgba(9, 181, 239, 0.22),
+    rgba(108, 63, 245, 0.16)
+  );
+}
+
+.login-left__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.login-left__logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+}
+
+.login-left__stage {
+  position: relative;
+  margin-top: 54px;
+  width: 560px;
+  max-width: 100%;
+  height: 420px;
+}
+
+.login-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* 移动端品牌（左侧隐藏时显示） */
+.login-mobile-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 0 18px;
+}
+
+.login-mobile-brand__logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.login-mobile-brand__name {
+  font-weight: 700;
+  color: #222;
+}
+
+/* 右侧卡片保持原风格，但更像“产品登录” */
+.login-card #login-title {
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.login-card .login-tip {
+  margin-bottom: 18px;
+}
+
+.login-password {
+  position: relative;
+}
+
+.login-input--password {
+  padding-right: 64px;
+}
+
+.login-password__toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: #555;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.login-password__toggle:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.login-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.login-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #333;
+}
+
+.login-link {
+  font-size: 13px;
+  color: #333;
+  text-decoration: underline;
+}
+
+.login-link[aria-disabled="true"] {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* 角色：基础定位 */
+.character {
+  position: absolute;
+  bottom: 0;
+  transform-origin: bottom center;
+  transition: transform 700ms ease-in-out, height 700ms ease-in-out;
+}
+
+.character__eyes {
+  position: absolute;
+  display: flex;
+  gap: 18px;
+  left: 46px;
+  top: 40px;
+  transition: transform 200ms ease-out;
+}
+
+.character__eyes--pupil-only {
+  gap: 22px;
+}
+
+.eye {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  transition: height 150ms ease;
+}
+
+.eye .pupil {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #2d2d2d;
+  transform: translate(var(--px, 0px), var(--py, 0px));
+  transition: transform 100ms ease-out;
+}
+
+.eye.is-blinking {
+  height: 2px;
+}
+
+.eye.is-blinking .pupil {
+  opacity: 0;
+}
+
+.pupil-only {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #2d2d2d;
+  transform: translate(var(--px, 0px), var(--py, 0px));
+  transition: transform 100ms ease-out;
+}
+
+/* 具体角色外观（尽量贴近参考的比例） */
+.character--purple {
+  left: 78px;
+  width: 180px;
+  height: 400px;
+  background: #6c3ff5;
+  border-radius: 10px 10px 0 0;
+  z-index: 1;
+}
+
+.character--black {
+  left: 250px;
+  width: 120px;
+  height: 310px;
+  background: #2d2d2d;
+  border-radius: 8px 8px 0 0;
+  z-index: 2;
+}
+
+.character--black .character__eyes {
+  left: 26px;
+  top: 32px;
+  gap: 14px;
+}
+
+.character--black .eye {
+  width: 16px;
+  height: 16px;
+}
+
+.character--black .eye .pupil {
+  width: 6px;
+  height: 6px;
+}
+
+.character--orange {
+  left: 0px;
+  width: 240px;
+  height: 200px;
+  background: #ff9b6b;
+  border-radius: 120px 120px 0 0;
+  z-index: 3;
+}
+
+.character--orange .character__eyes {
+  left: 82px;
+  top: 90px;
+}
+
+.character--yellow {
+  left: 320px;
+  width: 140px;
+  height: 230px;
+  background: #e8d754;
+  border-radius: 70px 70px 0 0;
+  z-index: 4;
+}
+
+.character--yellow .character__eyes {
+  left: 52px;
+  top: 40px;
+  gap: 16px;
+}
+
+.character__mouth {
+  position: absolute;
+  left: 40px;
+  top: 88px;
+  width: 80px;
+  height: 4px;
+  border-radius: 999px;
+  background: #2d2d2d;
+}
+
+/* 大屏显示两栏 */
+@media (min-width: 1024px) {
+  .login-layout {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .login-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .login-mobile-brand {
+    display: none;
+  }
+
+  .login-right {
+    padding: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .character,
+  .character__eyes,
+  .eye .pupil,
+  .pupil-only {
+    transition: none !important;
+  }
+}
