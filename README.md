@@ -7,22 +7,22 @@
 ## 页面说明
 
 - 登录页：`index.html`
-	- 登录成功后跳转主页
-	- 背景主题使用 `assets/css/background.css`
+  - 登录成功后跳转主页
+  - 背景主题使用 `assets/css/background.css`
 - 注册页：`register.html`
-	- 注册信息写入 `localStorage.registeredUser`
+  - 注册信息写入 `localStorage.registeredUser`
 - 主页：`home.html`
-	- 顶部固定导航栏（`#daohang`）
-	- “学历/获奖/科研/联系方式”通过 `#hash` 切换显示（如 `home.html#awards`）
+  - 顶部固定导航栏（`#daohang`）
+  - “学历/获奖/科研/联系方式”通过 `#hash` 切换显示（如 `home.html#awards`）
 - 经验分享（文章列表）：`sharing.html`
-	- 展示“标题 + 时间/关键词 + 摘要（前几行）”
-	- 点击进入对应文章详情页
+  - 展示“标题 + 时间/关键词 + 摘要（前几行）”
+  - 点击进入对应文章详情页
 - 文章详情页：`posts/*.html`
-	- 每篇文章独立一个 HTML
-	- 文章样式共用同一个 CSS：`assets/css/posts.css`
+  - 每篇文章独立一个 HTML
+  - 文章样式共用同一个 CSS：`assets/css/posts.css`
 - 照片墙：`photowall.html`
-	- 3D 环形照片墙，可鼠标/触摸拖动旋转寻找照片
-	- 照片数量可扩展（按数量自动均分环形角度）
+  - 3D 环形照片墙，可鼠标/触摸拖动旋转寻找照片
+  - 照片数量可扩展（按数量自动均分环形角度）
 
 ## 运行方式
 
@@ -37,11 +37,11 @@
 ## 登录与访问控制
 
 - 登录逻辑：`assets/js/index.js`
-	- 如果你注册过，会优先使用注册账号密码登录
-	- 否则会使用内置的演示账号（写在代码里）
+  - 如果你注册过，会优先使用注册账号密码登录
+  - 否则会使用内置的演示账号（写在代码里）
 - 登录校验：`assets/js/auth.js`
-	- `home.html`、`sharing.html`、`posts/*.html`、`photowall.html` 都会校验 `localStorage.loggedIn === '1'`
-	- 未登录会自动跳回 `index.html`
+  - `home.html`、`sharing.html`、`posts/*.html`、`photowall.html` 都会校验 `localStorage.loggedIn === '1'`
+  - 未登录会自动跳回 `index.html`
 
 ## 经验分享（新增文章）
 
@@ -78,7 +78,7 @@
 
 ```html
 <div class="item" data-photowall-item>
-	<img src="assets/img/8.webp" alt="照片 8" />
+  <img src="assets/img/8.webp" alt="照片 8" />
 </div>
 ```
 
@@ -99,7 +99,7 @@ JS 会自动统计 `data-photowall-item` 数量并均分一圈角度。
 
 ## 目录结构
 
-```
+```text
 index.html                登录页
 register.html             注册页
 home.html                 主页
@@ -108,19 +108,19 @@ photowall.html            3D 环形照片墙
 posts/                    文章详情页（每篇一份 HTML）
 
 assets/
-	css/
-		index.css             登录页样式
-		register.css          注册页补充样式
-		home.css              主页 + 顶部导航栏样式
-		sharing.css           经验分享列表页小覆盖
-		posts.css             文章列表/详情共用样式
-		photowall.css         3D 照片墙样式
-		background.css        背景主题
-	js/
-		index.js              登录逻辑
-		register.js           注册逻辑
-		home.js               主页 hash 切换逻辑
-		photowall.js          照片墙拖动旋转逻辑
-		auth.js               登录态校验
-	img/                    图片资源
+  css/
+    index.css             登录页样式
+    register.css          注册页补充样式
+    home.css              主页 + 顶部导航栏样式
+    sharing.css           经验分享列表页小覆盖
+    posts.css             文章列表/详情共用样式
+    photowall.css         3D 照片墙样式
+    background.css        背景主题
+  js/
+    index.js              登录逻辑
+    register.js           注册逻辑
+    home.js               主页 hash 切换逻辑
+    photowall.js          照片墙拖动旋转逻辑
+    auth.js               登录态校验
+  img/                    图片资源
 ```
