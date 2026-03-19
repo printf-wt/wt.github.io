@@ -14,6 +14,11 @@
         let startRotation = 0;
         let rotation = 0;
 
+        const prefersReducedMotion = window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // 自动旋转速度：度/毫秒（例如 0.006 => 约 6deg/s）
+        const AUTO_ROTATE_DEG_PER_MS = 0.006;
+
         const setRotation = (value) => {
             rotation = value;
             ring.style.setProperty('--rotation', `${rotation}deg`);
@@ -49,6 +54,23 @@
         ring.addEventListener('pointermove', onPointerMove);
         ring.addEventListener('pointerup', endDrag);
         ring.addEventListener('pointercancel', endDrag);
+
+        if (!prefersReducedMotion) {
+            let lastTime = 0;
+            const tick = (now) => {
+                if (!lastTime) lastTime = now;
+                const delta = now - lastTime;
+                lastTime = now;
+
+                if (!isDragging) {
+                    setRotation(rotation + delta * AUTO_ROTATE_DEG_PER_MS);
+                }
+
+                requestAnimationFrame(tick);
+            };
+
+            requestAnimationFrame(tick);
+        }
 
         // 默认稍微转一点，避免完全正面重叠
         setRotation(-10);

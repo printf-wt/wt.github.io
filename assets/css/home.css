@@ -14,7 +14,7 @@ body {
     top: 0; /* 距离页面顶部 0 像素 */
     left: 0; /* 贴齐左侧 */
     width: 100%; /* 占满整个页面宽度 */
-    background-color: #333; /* 设置背景颜色为深灰色 */
+    background-color: #ffffff4b; /* 设置背景颜色为深灰色 */
     display: flex; /* 使用弹性布局 */
     justify-content: center; /* 水平居中对齐按钮 */
     flex-wrap: wrap; /* 按钮多了以后自动换行（更适合扩展） */
@@ -27,8 +27,8 @@ body {
 /* 导航按钮/链接样式 */
 #daohang button,
 #daohang a {
-    background-color: #444; /* 设置按钮背景颜色为稍浅的灰色 */
-    color: white; /* 设置按钮文字颜色为白色 */
+    background-color: #09b5ef4b; /* 设置按钮背景颜色为稍浅的灰色 */
+    color: rgb(255, 255, 255); /* 设置按钮文字颜色为白色 */
     border: none; /* 去除按钮边框 */
     padding: 10px 20px; /* 设置按钮内边距 */
     margin: 0; /* 间距交给 nav 的 gap 控制 */
@@ -38,12 +38,13 @@ body {
     transition: background-color 0.3s; /* 添加背景颜色渐变效果 */
     text-decoration: none; /* 去除链接下划线 */
     display: inline-block; /* 让 a 的 padding 生效更稳定 */
+    z-index: 1001; /* 确保按钮层级高于导航栏背景 */
 }
 
 /* 鼠标悬停时按钮/链接的样式 */
 #daohang button:hover,
 #daohang a:hover {
-    background-color: #555; /* 鼠标悬停时背景颜色变深 */
+    background-color: #0165fa; /* 鼠标悬停时背景颜色变深 */
 }
 
 /* 内容区域样式 */
