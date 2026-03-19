@@ -1,14 +1,23 @@
 # 个人博客（静态站点 / GitHub Pages）
 
-这是一个纯前端的个人博客小站点，包含登录/注册、个人主页信息展示、经验分享文章列表与文章详情页，以及可拖动旋转的 3D 环形照片墙。
+这是一个纯前端的个人博客小站点，包含登录/注册、个人主页信息展示、经验分享文章列表与文章详情页，以及可拖动旋转（并支持自动旋转）的 3D 环形照片墙。
 
 > 说明：本项目无后端，所有“登录态/注册信息”均使用浏览器 `localStorage` 存储。
+
+## 近期更新（UI/交互）
+
+- 统一浅色系背景与导航栏：降低背景纹理对比度，整体更柔和
+- 登录页升级为「左侧卡通互动 + 右侧表单」布局：鼠标跟随、随机眨眼、输入时互动、密码显示时“偷看”
+- 照片墙新增自动旋转：拖拽时自动暂停，松手后继续
+- 支持系统“减少动态效果”（`prefers-reduced-motion`）时自动减少/关闭动画
 
 ## 页面说明
 
 - 登录页：`index.html`
   - 登录成功后跳转主页
   - 背景主题使用 `assets/css/background.css`
+  - 动画/布局样式：`assets/css/login-animated.css`
+  - 动画脚本：`assets/js/login-animated.js`
 - 注册页：`register.html`
   - 注册信息写入 `localStorage.registeredUser`
 - 主页：`home.html`
@@ -23,6 +32,7 @@
 - 照片墙：`photowall.html`
   - 3D 环形照片墙，可鼠标/触摸拖动旋转寻找照片
   - 照片数量可扩展（按数量自动均分环形角度）
+  - 默认自动缓慢旋转；拖拽时暂停自动旋转
 
 ## 运行方式
 
@@ -70,7 +80,11 @@
 
 - 页面：`photowall.html`
 - 样式：`assets/css/photowall.css`
-- 拖动旋转逻辑：`assets/js/photowall.js`
+- 拖动 + 自动旋转逻辑：`assets/js/photowall.js`
+
+### 调整自动旋转速度
+
+在 `assets/js/photowall.js` 中调整常量 `AUTO_ROTATE_DEG_PER_MS`（单位：度/毫秒）。
 
 ### 增加照片数量
 
@@ -92,6 +106,8 @@ JS 会自动统计 `data-photowall-item` 数量并均分一圈角度。
 
 统一背景主题定义在：`assets/css/background.css`。
 
+说明：背景纹理已调整为更浅的低对比度风格，并放慢动画；如果系统开启“减少动态效果”，背景动画会自动停止。
+
 使用方式：
 
 1. 在页面 `<head>` 中引入 `assets/css/background.css`
@@ -110,6 +126,7 @@ posts/                    文章详情页（每篇一份 HTML）
 assets/
   css/
     index.css             登录页样式
+    login-animated.css     登录页：左侧卡通互动布局与样式
     register.css          注册页补充样式
     home.css              主页 + 顶部导航栏样式
     sharing.css           经验分享列表页小覆盖
@@ -118,9 +135,15 @@ assets/
     background.css        背景主题
   js/
     index.js              登录逻辑
+    login-animated.js      登录页：卡通角色互动脚本
     register.js           注册逻辑
     home.js               主页 hash 切换逻辑
     photowall.js          照片墙拖动旋转逻辑
     auth.js               登录态校验
   img/                    图片资源
+
+可选（未接入当前静态站点运行）：
+components/ui/            React/shadcn 风格组件草稿（需要 React + TS + Tailwind 环境）
+lib/utils.ts              cn 工具函数（React 组件用）
+demo.tsx                  React 示例入口（静态站点不使用）
 ```
