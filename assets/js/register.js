@@ -67,7 +67,7 @@
             return;
         }
 
-        window.location.href = 'index.html';
+        window.location.href = 'login.html';
     });
 
     usernameInput.focus();

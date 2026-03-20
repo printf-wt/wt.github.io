@@ -54,7 +54,7 @@
             // localStorage 不可用时也允许进入
         }
 
-        window.location.href = 'home.html';
+        window.location.href = 'index.html';
     });
 
     usernameInput.focus();

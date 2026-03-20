@@ -13,16 +13,17 @@
 
 ## 页面说明
 
-- 登录页：`index.html`
+- 对外主页（入口页）：`index.html`
+  - 外来浏览默认先看到主页信息，不会强制登录
+  - 顶部导航栏（`#daohang`）
+  - “学历/获奖/科研/联系方式”通过 `#hash` 切换显示（如 `index.html#awards`）
+- 登录页：`login.html`
   - 登录成功后跳转主页
   - 背景主题使用 `assets/css/background.css`
   - 动画/布局样式：`assets/css/login-animated.css`
   - 动画脚本：`assets/js/login-animated.js`
 - 注册页：`register.html`
   - 注册信息写入 `localStorage.registeredUser`
-- 主页：`home.html`
-  - 顶部固定导航栏（`#daohang`）
-  - “学历/获奖/科研/联系方式”通过 `#hash` 切换显示（如 `home.html#awards`）
 - 经验分享（文章列表）：`sharing.html`
   - 展示“标题 + 时间/关键词 + 摘要（前几行）”
   - 点击进入对应文章详情页
@@ -50,8 +51,8 @@
   - 如果你注册过，会优先使用注册账号密码登录
   - 否则会使用内置的演示账号（写在代码里）
 - 登录校验：`assets/js/auth.js`
-  - `home.html`、`sharing.html`、`posts/*.html`、`photowall.html` 都会校验 `localStorage.loggedIn === '1'`
-  - 未登录会自动跳回 `index.html`
+  - `sharing.html`、`posts/*.html`、`photowall.html` 会校验 `localStorage.loggedIn === '1'`
+  - 未登录会自动跳到 `login.html`
 
 ## 经验分享（新增文章）
 
@@ -116,9 +117,9 @@ JS 会自动统计 `data-photowall-item` 数量并均分一圈角度。
 ## 目录结构
 
 ```text
-index.html                登录页
+index.html                对外主页（入口页）
+login.html                登录页
 register.html             注册页
-home.html                 主页
 sharing.html              经验分享（文章列表）
 photowall.html            3D 环形照片墙
 posts/                    文章详情页（每篇一份 HTML）

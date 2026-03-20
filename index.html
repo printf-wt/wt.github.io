@@ -1,96 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>登录</title>
-    <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="assets/css/login-animated.css">
+    <title>个人博客-王腾</title>
+    <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/background.css">
 </head>
 <body class="background">
-    <main class="login-layout" aria-label="登录页面">
-        <section class="login-left" aria-hidden="true">
-            <div class="login-left__stage" data-login-stage>
-                <div class="character character--purple" data-character="purple">
-                    <div class="character__eyes" data-face>
-                        <div class="eye" data-eye data-eye-owner="purple">
-                            <div class="pupil" data-pupil></div>
-                        </div>
-                        <div class="eye" data-eye data-eye-owner="purple">
-                            <div class="pupil" data-pupil></div>
-                        </div>
-                    </div>
-                </div>
+    <a class="login-entry" href="login.html" target="_self">去登陆</a>
+    <div class="introduction">
+        <div class="left-column">
+            <img src="assets/img/image_self.jpg" alt="个人头像" width="200" height="200">
+        </div>
+        <div class="right-column">
+            <p>个人信息</p>
+            <p>姓名：王腾</p>
+            <p>年龄：20岁</p>
+            <p>学历：本科</p>
+            <p>专业：计算机科学与技术</p>
+            <p>院校：中南林业科技大学计算机与数学学院</p>
+        </div>
+    </div>
 
-                <div class="character character--black" data-character="black">
-                    <div class="character__eyes" data-face>
-                        <div class="eye" data-eye data-eye-owner="black">
-                            <div class="pupil" data-pupil></div>
-                        </div>
-                        <div class="eye" data-eye data-eye-owner="black">
-                            <div class="pupil" data-pupil></div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="character character--orange" data-character="orange">
-                    <div class="character__eyes character__eyes--pupil-only" data-face>
-                        <div class="pupil-only" data-pupil-only></div>
-                        <div class="pupil-only" data-pupil-only></div>
-                    </div>
-                </div>
+    
+    <nav id="daohang">
+        <a href="#education" data-section="education">学历信息</a>
+        <a href="#awards" data-section="awards">获奖经历</a>
+        <a href="#research" data-section="research">科研经历</a>
+        <a href="#contact" data-section="contact">联系方式</a>
+        <a href="sharing.html">经验分享</a>
+        <a href="photowall.html" target="_self">照片墙</a>
+    </nav>
 
-                <div class="character character--yellow" data-character="yellow">
-                    <div class="character__eyes character__eyes--pupil-only" data-face>
-                        <div class="pupil-only" data-pupil-only></div>
-                        <div class="pupil-only" data-pupil-only></div>
-                    </div>
-                    <div class="character__mouth" aria-hidden="true"></div>
-                </div>
-            </div>
-        </section>
+    <!-- 学历信息内容区域，默认隐藏 -->
+    <section id="education">
+        <h2>学历信息</h2>
+        <p>小学：小学</p>
+        <p>初中：初中学</p>
+        <p>高中：高中学</p>
+        <p>大学：中南林业科技大学计算机与数学学院</p>
+    </section>
 
-        <section class="login-right">
-            <div class="login-card" role="dialog" aria-modal="true" aria-labelledby="login-title">
-                <div class="login-mobile-brand" aria-hidden="true">
-                    <div class="login-mobile-brand__logo">✨</div>
-                    <span class="login-mobile-brand__name">YourBrand</span>
-                </div>
+    <!-- 获奖经历内容区域，默认隐藏 -->
+    <section id="awards">
+        <h2>获奖经历</h2>
+        <p>2025年1月，获得2025年1月的奖</p>
+        <p>2025年12月，获得2025年12月的奖</p>
+        <p>2025年12月，获得2025年12月的奖</p>
+        <p>2025年12月，获得2025年12月的奖</p>
+        <p>2025年12月，获得2025年12月的奖。</p>
+    </section>
 
-                <h1 id="login-title">Welcome back!</h1>
-                <p class="login-tip">请输入账号与密码登录</p>
-
-                <form id="login-form" class="login-form" data-login-form>
-                    <label class="login-label" for="login-username">用户名</label>
-                    <input id="login-username" name="username" class="login-input" type="text" autocomplete="username" required>
-
-                    <label class="login-label" for="login-password">密码</label>
-                    <div class="login-password">
-                        <input id="login-password" name="password" class="login-input login-input--password" type="password" autocomplete="current-password" required>
-                        <button class="login-password__toggle" type="button" data-password-toggle aria-label="显示或隐藏密码">显示</button>
-                    </div>
-
-                    <div class="login-row">
-                        <label class="login-checkbox">
-                            <input type="checkbox" data-remember>
-                            <span>记住我</span>
-                        </label>
-                    </div>
-
-                    <p id="login-error" class="login-error" role="alert" aria-live="polite"></p>
-
-                    <button class="login-button" type="submit">进入主页</button>
-
-                    <a class="login-register" href="register.html">没有账号？去注册</a>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <script src="assets/js/index.js" defer></script>
-    <script src="assets/js/login-animated.js" defer></script>
+    <!-- 科研经历内容区域，默认隐藏 -->
+    <section id="research">
+        <h2>科研经历</h2>
+        <p>2026年2月，发表《基于朋友圈可见性变化的学术社交关系网络断裂机制研究》于《joker of academic》</p>
+        <p>2026年3月，发表《小猪佩奇 vs 猪猪侠烹饪对比应用研究：基于跨IP对照建 模的虚拟角色食品工程玄学分析》于《joker of academic》</p>
+    </section>
+    <section id="contact">
+        <h2>联系方式</h2>
+        <p>邮箱：wangteng@scuft.edu.cn</p>
+        <p>电话：17673680052</p>
+    </section>
+    <script src="assets/js/home.js" defer></script>
 </body>
-</html>
 
+</html>
 

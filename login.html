@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录</title>
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/login-animated.css">
+    <link rel="stylesheet" href="assets/css/background.css">
+</head>
+<body class="background">
+    <main class="login-layout" aria-label="登录页面">
+        <section class="login-left" aria-hidden="true">
+            <div class="login-left__stage" data-login-stage>
+                <div class="character character--purple" data-character="purple">
+                    <div class="character__eyes" data-face>
+                        <div class="eye" data-eye data-eye-owner="purple">
+                            <div class="pupil" data-pupil></div>
+                        </div>
+                        <div class="eye" data-eye data-eye-owner="purple">
+                            <div class="pupil" data-pupil></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="character character--black" data-character="black">
+                    <div class="character__eyes" data-face>
+                        <div class="eye" data-eye data-eye-owner="black">
+                            <div class="pupil" data-pupil></div>
+                        </div>
+                        <div class="eye" data-eye data-eye-owner="black">
+                            <div class="pupil" data-pupil></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="character character--orange" data-character="orange">
+                    <div class="character__eyes character__eyes--pupil-only" data-face>
+                        <div class="pupil-only" data-pupil-only></div>
+                        <div class="pupil-only" data-pupil-only></div>
+                    </div>
+                </div>
+
+                <div class="character character--yellow" data-character="yellow">
+                    <div class="character__eyes character__eyes--pupil-only" data-face>
+                        <div class="pupil-only" data-pupil-only></div>
+                        <div class="pupil-only" data-pupil-only></div>
+                    </div>
+                    <div class="character__mouth" aria-hidden="true"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="login-right">
+            <div class="login-card" role="dialog" aria-modal="true" aria-labelledby="login-title">
+                <div class="login-mobile-brand" aria-hidden="true">
+                    <div class="login-mobile-brand__logo">✨</div>
+                    <span class="login-mobile-brand__name">YourBrand</span>
+                </div>
+
+                <h1 id="login-title">Welcome back!</h1>
+                <p class="login-tip">请输入账号与密码登录</p>
+
+                <form id="login-form" class="login-form" data-login-form>
+                    <label class="login-label" for="login-username">用户名</label>
+                    <input id="login-username" name="username" class="login-input" type="text" autocomplete="username" required>
+
+                    <label class="login-label" for="login-password">密码</label>
+                    <div class="login-password">
+                        <input id="login-password" name="password" class="login-input login-input--password" type="password" autocomplete="current-password" required>
+                        <button class="login-password__toggle" type="button" data-password-toggle aria-label="显示或隐藏密码">显示</button>
+                    </div>
+
+                    <div class="login-row">
+                        <label class="login-checkbox">
+                            <input type="checkbox" data-remember>
+                            <span>记住我</span>
+                        </label>
+                    </div>
+
+                    <p id="login-error" class="login-error" role="alert" aria-live="polite"></p>
+
+                    <button class="login-button" type="submit">进入主页</button>
+
+                    <a class="login-register" href="register.html">没有账号？去注册</a>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/index.js" defer></script>
+    <script src="assets/js/login-animated.js" defer></script>
+</body>
+</html>
+
+

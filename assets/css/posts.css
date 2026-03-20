@@ -8,27 +8,27 @@
 }
 
 .post {
-    background: #fafafa;
-    border: 1px solid #eee;
+    background: rgba(248, 250, 255, 0.92);
+    border: 1px solid rgba(0, 0, 0, 0.10);
     border-radius: 12px;
     padding: 16px;
 }
 
 .post-title {
     margin: 0 0 6px;
-    color: #333;
+    color: #1f2330;
     font-size: 18px;
 }
 
 .post-meta {
     margin: 0 0 10px;
     font-size: 13px;
-    color: #777;
+    color: #55607a;
 }
 
 .post-excerpt {
     margin: 0;
-    color: #555;
+    color: #3c445c;
     line-height: 1.7;
     font-size: 14px;
 }
@@ -48,27 +48,28 @@
     max-width: 1000px;
     margin: 16px auto;
     padding: 20px;
-    background: #fff;
+    background: rgba(248, 250, 255, 0.94);
     border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .post-page h1 {
     margin: 0 0 8px;
-    color: #333;
+    color: #1f2330;
     font-size: 24px;
 }
 
 .post-page .meta {
     margin: 0 0 16px;
-    color: #777;
+    color: #55607a;
     font-size: 13px;
     line-height: 1.6;
 }
 
 .post-page .content p {
     margin: 10px 0;
-    color: #555;
+    color: #3c445c;
     line-height: 1.9;
     font-size: 16px;
 }
