@@ -1,3 +1,11 @@
+/*
+    登录/注册表单基础样式（login.html / register.html 复用）
+
+    说明：
+    - 该文件主要覆盖“右侧表单卡片”的视觉与表单控件样式
+    - 登录页的黑白分栏盒子/左侧卡通舞台等布局在 login-animated.css
+*/
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;

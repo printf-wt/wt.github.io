@@ -1,3 +1,15 @@
+/*
+    主页（index.html）样式
+
+    主要负责：
+    - 顶部固定导航栏（#daohang）
+    - 内容 section 的排版与卡片样式
+    - 右上角固定“去登陆”入口（.login-entry）
+
+    提示：
+    - 如需统一配色，优先在本文件中集中调整，而不要分散到各处。
+*/
+
 body {
     font-family: Arial, sans-serif; /* 设置字体为无衬线字体 */
     margin: 0; /* 去除默认的页面边距 */

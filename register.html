@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>注册</title>
+    <!--
+      样式说明：
+      - assets/css/login.css：表单控件通用样式（与登录页一致）
+      - assets/css/register.css：注册页特有的 fieldset/选项排版
+      - assets/css/background.css：背景纹理/动效
+
+      脚本说明：
+      - assets/js/register.js：本地校验后写 localStorage.registeredUser，成功跳 login.html
+    -->
     <link rel="stylesheet" href="assets/css/login.css">
     <link rel="stylesheet" href="assets/css/background.css">
     <link rel="stylesheet" href="assets/css/register.css">
@@ -14,6 +23,7 @@
             <h1 id="register-title" class="register-title">注册</h1>
             <p class="login-tip">请填写注册信息</p>
 
+            <!-- 注册表单：提交后由 JS 拦截，在浏览器 localStorage 中保存 -->
             <form id="register-form" class="login-form">
                 <label class="login-label" for="reg-username">账号</label>
                 <input id="reg-username" name="username" class="login-input" type="text" autocomplete="username" required>
@@ -48,6 +58,7 @@
         </div>
     </main>
 
+    <!-- 注册逻辑：校验 + 写入 registeredUser + 跳转登录页 -->
     <script src="assets/js/register.js" defer></script>
 </body>
 </html>

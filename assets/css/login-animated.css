@@ -1,24 +1,46 @@
-/* 登录页：左侧卡通互动 + 右侧表单（仅影响 login.html） */
+/*
+  登录页：左侧卡通互动 + 右侧表单（仅影响 login.html）
+
+  结构约定（与 login.html 对齐）：
+  - .login-layout：整页居中布局容器
+  - .login-shell：统一外层盒子（包裹左/右两栏）
+  - .login-left：左侧黑底卡通舞台
+  - .login-right：右侧白底表单区域（具体表单控件样式在 login.css）
+
+  占比可调：
+  - 通过 .login-shell 上的 --shell-left / --shell-right 控制左右分栏比例
+  - 在桌面端媒体查询中启用 grid-template-columns: var(--shell-left) var(--shell-right)
+*/
 
 .login-layout {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
   position: relative;
   z-index: 9999;
 }
 
+/* 一个统一的“外层盒子”：左右等分 */
+.login-shell {
+  width: min(1100px, 92vw);
+  display: grid;
+  --shell-left: 5.5fr;
+  --shell-right: 4.5fr;
+  grid-template-columns: 1fr;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+}
+
 .login-left {
-  display: none;
+  display: flex;
   position: relative;
   overflow: hidden;
   padding: 48px;
-  color: #333;
-  background: linear-gradient(
-    135deg,
-    rgba(46, 102, 220, 0.22),
-    rgba(82, 86, 214, 0.16)
-  );
+  color: #fff;
+  background: #000;
 }
 
 .login-left__brand {
@@ -51,7 +73,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 48px;
+  background: #fff;
+}
+
+/* 右侧不再需要“卡片背景/阴影”，保持在白色半区内即可 */
+.login-right .login-card {
+  max-width: 460px;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
 }
 
 /* 移动端品牌（左侧隐藏时显示） */
@@ -275,22 +307,28 @@
 
 /* 大屏显示两栏 */
 @media (min-width: 1024px) {
-  .login-layout {
-    grid-template-columns: 1.15fr 0.85fr;
-  }
-
-  .login-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  .login-shell {
+    grid-template-columns: var(--shell-left) var(--shell-right);
   }
 
   .login-mobile-brand {
     display: none;
   }
+}
 
+@media (max-width: 1023px) {
+  /* 小屏：仍在同一个盒子里，上下排列 */
   .login-right {
-    padding: 48px;
+    padding: 28px;
+  }
+
+  .login-left {
+    padding: 28px;
+  }
+
+  .login-left__stage {
+    margin-top: 24px;
+    height: 360px;
   }
 }
 

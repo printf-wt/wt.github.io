@@ -3,11 +3,23 @@
 <head>
     <meta charset="utf-8">
     <title>个人博客-王腾</title>
+    <!--
+      样式说明：
+      - assets/css/index.css：主页排版、导航栏、卡片样式、右上角“去登陆”按钮
+      - assets/css/background.css：背景纹理/动效（body 使用 class="background" 启用）
+
+      入口策略：
+      - 本页允许“未登录访问”（不引用 auth.js）
+      - 需要登录保护的页面（如分享/照片墙/文章）在各自页面引用 auth.js
+    -->
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/background.css">
 </head>
 <body class="background">
+    <!-- 右上角入口：外来访问先看主页，需要时再进入登录页 -->
     <a class="login-entry" href="login.html" target="_self">去登陆</a>
+
+    <!-- 个人信息简介区：左头像 + 右侧基本信息 -->
     <div class="introduction">
         <div class="left-column">
             <img src="assets/img/image_self.jpg" alt="个人头像" width="200" height="200">
@@ -24,7 +36,12 @@
 
 
     
-    <nav id="daohang">
+        <!--
+            顶部固定导航：
+            - 带 data-section 的链接用于“单页 section 切换”（由 assets/js/index.js 处理）
+            - sharing/photowall 是独立页面，直接跳转
+        -->
+        <nav id="daohang">
         <a href="#education" data-section="education">学历信息</a>
         <a href="#awards" data-section="awards">获奖经历</a>
         <a href="#research" data-section="research">科研经历</a>
@@ -63,7 +80,12 @@
         <p>邮箱：wangteng@scuft.edu.cn</p>
         <p>电话：17673680052</p>
     </section>
-    <script src="assets/js/index.js" defer></script>
+        <!--
+            主页交互脚本：
+            - 负责 hash 与 section 显示/隐藏同步
+            - 支持点击导航、刷新直达、前进后退
+        -->
+        <script src="assets/js/index.js" defer></script>
 </body>
 
 </html>

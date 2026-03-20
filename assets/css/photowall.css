@@ -1,4 +1,13 @@
-/* 照片墙：3D 环形 + 拖动旋转 */
+/*
+    照片墙：3D 环形 + 拖动旋转
+
+    与 JS 的配合点：
+    - JS 会写入 ring 的 --count / 每个 item 的 --i / ring 的 --rotation
+    - CSS 使用这些变量计算每张图片的 rotateY(...) / translateZ(...)
+
+    交互提示：
+    - .ring 使用 cursor: grab + touch-action: none，配合 pointer 事件拖拽
+*/
 
 * {
     margin: 0;

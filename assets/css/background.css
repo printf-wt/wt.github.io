@@ -1,62 +1,129 @@
+/*
+  背景动效样式（背景层）
+
+  用途：
+  - 提供可复用的背景容器 .background
+  - 通过多层 radial-gradient 叠加出纹理效果，并用 animation 做缓慢位移
+
+  使用方式（示例）：
+  - 直接给 body 加 class="background"
+  - 或者在页面中放一个 <div class="background"></div> 作为背景层
+*/
+
 /* From Uiverse.io by mihocsaszilard - 背景动画效果 */
 
 /* 背景容器样式 */
 .background {
-  /* 自定义CSS变量 - 基础背景色，浅灰蓝色 */
-  --bg-base: #00fdc2;
-  /* 自定义CSS变量 - 墨水色，半透明的深紫色，用于径向渐变 */
-  --bg-ink: rgb(44, 23, 119);
+  /* 自定义CSS变量 - 基础背景色 */
+  --bg-base: #cae9f1;
+  /* 自定义CSS变量 - 墨水色，用于径向渐变 */
+  --bg-ink: #272257;
 
   /* 宽度和高度占满整个容器 */
   width: 100%;
   height: 100%;
   /* 设置基础背景色 */
   background: var(--bg-base);
-  
+
   /* 多层径向渐变组合，创建复杂的点阵背景图案
      每个渐变组的模式：两组大圆点 + 一组小圆点，形成视觉层次 */
-  background-image: 
+  background-image:
     /* 第一组 - 位置: 0px 235px 处的大圆点 */
     radial-gradient(4px 100px at 0px 235px, var(--bg-ink), #0000),
     /* 第一组 - 位置: 300px 235px 处的大圆点 */
     radial-gradient(4px 100px at 300px 235px, var(--bg-ink), #0000),
     /* 第一组 - 位置: 150px 117.5px 处的小圆点，不透明度过渡 */
     radial-gradient(1.5px 1.5px at 150px 117.5px, var(--bg-ink) 100%, #0000 150%),
-    
+
     /* 第二组 - 位置偏移的重复图案，以此类推 */
     radial-gradient(4px 100px at 0px 252px, var(--bg-ink), #0000),
     radial-gradient(4px 100px at 300px 252px, var(--bg-ink), #0000),
     radial-gradient(1.5px 1.5px at 150px 126px, var(--bg-ink) 100%, #0000 150%),
-    
-    /* ... 继续多组相同模式的渐变，每组有不同的垂直位置偏移
-         总共36个渐变层，形成丰富的纹理效果 */
-    
-    /* 最后一组 */
+
+    radial-gradient(4px 100px at 0px 150px, var(--bg-ink), #0000),
+    radial-gradient(4px 100px at 300px 150px, var(--bg-ink), #0000),
+    radial-gradient(1.5px 1.5px at 150px 75px, var(--bg-ink) 100%, #0000 150%),
+
+    radial-gradient(4px 100px at 0px 253px, var(--bg-ink), #0000),
+    radial-gradient(4px 100px at 300px 253px, var(--bg-ink), #0000),
+    radial-gradient(1.5px 1.5px at 150px 126.5px, var(--bg-ink) 100%, #0000 150%),
+
+    radial-gradient(4px 100px at 0px 204px, var(--bg-ink), #0000),
+    radial-gradient(4px 100px at 300px 204px, var(--bg-ink), #0000),
+    radial-gradient(1.5px 1.5px at 150px 102px, var(--bg-ink) 100%, #0000 150%),
+
+    radial-gradient(4px 100px at 0px 134px, var(--bg-ink), #0000),
+    radial-gradient(4px 100px at 300px 134px, var(--bg-ink), #0000),
+    radial-gradient(1.5px 1.5px at 150px 67px, var(--bg-ink) 100%, #0000 150%),
+
+    radial-gradient(4px 100px at 0px 179px, var(--bg-ink), #0000),
+    radial-gradient(4px 100px at 300px 179px, var(--bg-ink), #0000),
+    radial-gradient(1.5px 1.5px at 150px 89.5px, var(--bg-ink) 100%, #0000 150%),
+
+    radial-gradient(4px 100px at 0px 299px, var(--bg-ink), #0000),
+    radial-gradient(4px 100px at 300px 299px, var(--bg-ink), #0000),
+    radial-gradient(1.5px 1.5px at 150px 149.5px, var(--bg-ink) 100%, #0000 150%),
+
+    radial-gradient(4px 100px at 0px 215px, var(--bg-ink), #0000),
+    radial-gradient(4px 100px at 300px 215px, var(--bg-ink), #0000),
+    radial-gradient(1.5px 1.5px at 150px 107.5px, var(--bg-ink) 100%, #0000 150%),
+
+    radial-gradient(4px 100px at 0px 281px, var(--bg-ink), #0000),
+    radial-gradient(4px 100px at 300px 281px, var(--bg-ink), #0000),
+    radial-gradient(1.5px 1.5px at 150px 140.5px, var(--bg-ink) 100%, #0000 150%),
+
+    radial-gradient(4px 100px at 0px 158px, var(--bg-ink), #0000),
+    radial-gradient(4px 100px at 300px 158px, var(--bg-ink), #0000),
+    radial-gradient(1.5px 1.5px at 150px 79px, var(--bg-ink) 100%, #0000 150%),
+
     radial-gradient(4px 100px at 0px 210px, var(--bg-ink), #0000),
     radial-gradient(4px 100px at 300px 210px, var(--bg-ink), #0000),
     radial-gradient(1.5px 1.5px at 150px 105px, var(--bg-ink) 100%, #0000 150%);
-  
-  /* 设置每个渐变的背景尺寸，对应上面的36个渐变
-     每组三个尺寸值，分别是：大圆点1、大圆点2、小圆点 */
+
+  /* 设置每个渐变的背景尺寸，对应上面的渐变层 */
   background-size:
-    300px 235px,  300px 235px,  300px 235px,  /* 第一组尺寸 */
-    300px 252px,  300px 252px,  300px 252px,  /* 第二组尺寸 */
-    300px 150px,  300px 150px,  300px 150px,  /* 第三组尺寸 */
-    300px 253px,  300px 253px,  300px 253px,  /* 第四组尺寸 */
-    300px 204px,  300px 204px,  300px 204px,  /* 第五组尺寸 */
-    300px 134px,  300px 134px,  300px 134px,  /* 第六组尺寸 */
-    300px 179px,  300px 179px,  300px 179px,  /* 第七组尺寸 */
-    300px 299px,  300px 299px,  300px 299px,  /* 第八组尺寸 */
-    300px 215px,  300px 215px,  300px 215px,  /* 第九组尺寸 */
-    300px 281px,  300px 281px,  300px 281px,  /* 第十组尺寸 */
-    300px 158px,  300px 158px,  300px 158px,  /* 第十一组尺寸 */
-    300px 210px,  300px 210px,  300px 210px;  /* 第十二组尺寸 */
-  
-  /* 应用动画: hi动画，持续时间240秒，线性运动，无限循环 */
+    300px 235px,
+    300px 235px,
+    300px 235px,
+    300px 252px,
+    300px 252px,
+    300px 252px,
+    300px 150px,
+    300px 150px,
+    300px 150px,
+    300px 253px,
+    300px 253px,
+    300px 253px,
+    300px 204px,
+    300px 204px,
+    300px 204px,
+    300px 134px,
+    300px 134px,
+    300px 134px,
+    300px 179px,
+    300px 179px,
+    300px 179px,
+    300px 299px,
+    300px 299px,
+    300px 299px,
+    300px 215px,
+    300px 215px,
+    300px 215px,
+    300px 281px,
+    300px 281px,
+    300px 281px,
+    300px 158px,
+    300px 158px,
+    300px 158px,
+    300px 210px,
+    300px 210px,
+    300px 210px;
+
+  /* 应用动画：持续时间较长，视觉更舒缓 */
   animation: hi 240s linear infinite;
 }
 
-/* 针对用户开启"减少动画"偏好设置的无障碍设计 */
+/* 针对用户开启“减少动画”偏好设置的无障碍设计 */
 @media (prefers-reduced-motion: reduce) {
   .background {
     /* 关闭动画，防止动画引起眩晕不适 */
@@ -64,49 +131,87 @@
   }
 }
 
-/* 定义hi动画关键帧 - 实现背景的垂直滚动效果 */
+/* 定义 hi 动画关键帧 - 实现背景的垂直滚动效果 */
 @keyframes hi {
-  /* 动画起始位置 - 为36个渐变设置不同的起始偏移量
-     每组三个值分别对应一个大圆点1、大圆点2、小圆点的垂直位置 */
+  /* 动画起始位置 - 为每个渐变设置不同的起始偏移量 */
   0% {
     background-position:
-      /* 第一组起始位置 */
-      0px 220px,      /* 第一个大圆点: 水平0px, 垂直220px */
-      3px 220px,      /* 第二个大圆点: 水平3px, 垂直220px */
-      151.5px 337.5px, /* 小圆点: 水平151.5px, 垂直337.5px */
-      
-      /* 第二组起始位置 */
-      25px 24px,      /* 水平25px, 垂直24px */
-      28px 24px,      /* 水平28px, 垂直24px */
-      176.5px 150px,  /* 水平176.5px, 垂直150px */
-      
-      /* ... 更多组的起始位置（每组偏移量都不同，创造错落效果） */
-      
-      /* 最后一组起始位置 */
-      275px 75px,     /* 水平275px, 垂直75px */
-      278px 75px,     /* 水平278px, 垂直75px */
-      426.5px 180px;  /* 水平426.5px, 垂直180px */
+      0px 220px,
+      3px 220px,
+      151.5px 337.5px,
+      25px 24px,
+      28px 24px,
+      176.5px 150px,
+      50px 16px,
+      53px 16px,
+      201.5px 91px,
+      75px 224px,
+      78px 224px,
+      226.5px 350.5px,
+      100px 19px,
+      103px 19px,
+      251.5px 121px,
+      125px 120px,
+      128px 120px,
+      276.5px 187px,
+      150px 31px,
+      153px 31px,
+      301.5px 120.5px,
+      175px 235px,
+      178px 235px,
+      326.5px 384.5px,
+      200px 121px,
+      203px 121px,
+      351.5px 228.5px,
+      225px 224px,
+      228px 224px,
+      376.5px 364.5px,
+      250px 26px,
+      253px 26px,
+      401.5px 105px,
+      275px 75px,
+      278px 75px,
+      426.5px 180px;
   }
-  
-  /* 动画结束位置 - 所有渐变都向下移动到很远的位置
-     不同的移动距离创造速度差异，形成视差效果 */
+
+  /* 动画结束位置 - 向下平移到较远位置形成滚动 */
   to {
     background-position:
-      /* 第一组终点位置 - 垂直移动了6580px (6800-220) */
-      0px 6800px,      /* 水平不变，垂直到6800px */
-      3px 6800px,      /* 水平3px不变，垂直到6800px */
-      151.5px 6917.5px, /* 水平151.5px不变，垂直到6917.5px (移动6580px) */
-      
-      /* 第二组终点位置 - 垂直移动了13608px (13632-24) */
-      25px 13632px,    /* 垂直到13632px */
-      28px 13632px,    /* 垂直到13632px */
-      176.5px 13758px, /* 垂直到13758px (移动13608px) */
-      
-      /* ... 各组都以不同的速度移动，创造丰富的视差效果 */
-      
-      /* 最后一组终点位置 - 垂直移动了6300px (6375-75) */
-      275px 6375px,    /* 垂直到6375px */
-      278px 6375px,    /* 垂直到6375px */
-      426.5px 6480px;  /* 垂直到6480px (移动6300px) */
+      0px 6800px,
+      3px 6800px,
+      151.5px 6917.5px,
+      25px 13632px,
+      28px 13632px,
+      176.5px 13758px,
+      50px 5416px,
+      53px 5416px,
+      201.5px 5491px,
+      75px 17175px,
+      78px 17175px,
+      226.5px 17301.5px,
+      100px 5119px,
+      103px 5119px,
+      251.5px 5221px,
+      125px 8428px,
+      128px 8428px,
+      276.5px 8495px,
+      150px 9876px,
+      153px 9876px,
+      301.5px 9965.5px,
+      175px 13391px,
+      178px 13391px,
+      326.5px 13540.5px,
+      200px 14741px,
+      203px 14741px,
+      351.5px 14848.5px,
+      225px 18770px,
+      228px 18770px,
+      376.5px 18910.5px,
+      250px 5082px,
+      253px 5082px,
+      401.5px 5161px,
+      275px 6375px,
+      278px 6375px,
+      426.5px 6480px;
   }
 }

@@ -4,12 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>经验分享 - 王腾</title>
+        <!--
+            样式说明：
+            - assets/css/index.css：复用导航栏样式
+            - assets/css/posts.css：文章列表/详情排版
+            - assets/css/sharing.css：本页的 display 覆盖（独立页面默认显示 section）
+            - assets/css/background.css：背景纹理/动效
+
+            脚本说明：
+            - assets/js/auth.js：访问控制（未登录跳 login.html）
+        -->
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/background.css">
     <link rel="stylesheet" href="assets/css/posts.css">
     <link rel="stylesheet" href="assets/css/sharing.css">
 </head>
 <body class="background">
+        <!-- 顶部导航：跳回主页的各个 section，或进入其它页面 -->
     <nav id="daohang">
         <a href="index.html#education">学历信息</a>
         <a href="index.html#awards">获奖经历</a>
@@ -19,6 +30,7 @@
         <a href="photowall.html" target="_self">照片墙</a>
     </nav>
 
+    <!-- 文章列表：每个条目链接到 posts/ 下的独立文章页 -->
     <section id="sharing">
         <h2>经验分享</h2>
 
@@ -41,6 +53,7 @@
         </div>
     </section>
 
+    <!-- 访问控制：未登录访问本页会被重定向到 login.html -->
     <script src="assets/js/auth.js" defer></script>
 </body>
 </html>

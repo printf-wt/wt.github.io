@@ -4,11 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>照片墙</title>
+        <!--
+            样式说明：
+            - assets/css/index.css：复用主页导航栏样式（固定顶部）
+            - assets/css/photowall.css：3D 照片墙布局
+            - assets/css/background.css：背景纹理/动效
+
+            脚本说明：
+            - assets/js/auth.js：访问控制（未登录跳 login.html）
+            - assets/js/photowall.js：拖拽旋转 + 自动旋转
+        -->
     <link rel="stylesheet" href="assets/css/index.css" />
     <link rel="stylesheet" href="assets/css/photowall.css" />
     <link rel="stylesheet" href="assets/css/background.css" />
 </head>
 <body class="background">
+        <!-- 访问控制：未登录访问本页会被重定向到 login.html -->
     <script src="assets/js/auth.js" defer></script>
 
     <nav id="daohang">
@@ -20,6 +31,7 @@
         <a href="photowall.html" target="_self">照片墙</a>
     </nav>
 
+    <!-- 3D 舞台容器：photowall.css 负责 3D 布局，photowall.js 负责交互 -->
     <div class="stage">
         <div class="ring" data-photowall-ring>
             <div class="item" data-photowall-item>
@@ -46,6 +58,7 @@
         </div>
     </div>
 
+    <!-- 照片墙交互脚本：写入 CSS 变量 + pointer 拖动 + 自动旋转 -->
     <script src="assets/js/photowall.js" defer></script>
 </body>
 </html>

@@ -1,3 +1,11 @@
+/*
+    注册页（register.html）补充样式
+
+    说明：
+    - 注册页主体表单样式多数复用 login.css
+    - 本文件放注册页特有的字段组/选项排版等差异
+*/
+
 .register-title {
     margin: 0 0 8px;
     color: #333;

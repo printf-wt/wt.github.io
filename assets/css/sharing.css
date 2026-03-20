@@ -1,4 +1,10 @@
-/* sharing.html 覆盖：让页面内容默认显示 */
+/*
+    sharing.html 覆盖：让页面内容默认显示
+
+    背景：
+    - 主页（index.html）通过 JS/hash 切换 section 的 display
+    - sharing.html 是独立页面，不需要隐藏 section，因此在这里显式 display: block
+*/
 
 #sharing {
     display: block;
