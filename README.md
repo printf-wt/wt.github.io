@@ -20,6 +20,7 @@
 - 登录页：`login.html`
   - 登录成功后跳转主页
   - 背景主题使用 `assets/css/background.css`
+  - 表单基础样式：`assets/css/login.css`
   - 动画/布局样式：`assets/css/login-animated.css`
   - 动画脚本：`assets/js/login-animated.js`
 - 注册页：`register.html`
@@ -47,7 +48,7 @@
 
 ## 登录与访问控制
 
-- 登录逻辑：`assets/js/index.js`
+- 登录逻辑：`assets/js/login.js`
   - 如果你注册过，会优先使用注册账号密码登录
   - 否则会使用内置的演示账号（写在代码里）
 - 登录校验：`assets/js/auth.js`
@@ -63,7 +64,7 @@
 文章页的样式统一引用：
 
 - `../assets/css/background.css`（背景主题）
-- `../assets/css/home.css`（复用导航栏样式）
+- `../assets/css/index.css`（复用导航栏样式）
 - `../assets/css/posts.css`（文章详情排版）
 
 并在页面底部引入：`../assets/js/auth.js`（登录校验）。
@@ -126,19 +127,19 @@ posts/                    文章详情页（每篇一份 HTML）
 
 assets/
   css/
-    index.css             登录页样式
+    index.css             主页 + 顶部导航栏样式
+    login.css             登录/注册页：表单基础样式
     login-animated.css     登录页：左侧卡通互动布局与样式
     register.css          注册页补充样式
-    home.css              主页 + 顶部导航栏样式
     sharing.css           经验分享列表页小覆盖
     posts.css             文章列表/详情共用样式
     photowall.css         3D 照片墙样式
     background.css        背景主题
   js/
-    index.js              登录逻辑
+    login.js              登录逻辑
     login-animated.js      登录页：卡通角色互动脚本
     register.js           注册逻辑
-    home.js               主页 hash 切换逻辑
+    index.js              主页 hash 切换逻辑
     photowall.js          照片墙拖动旋转逻辑
     auth.js               登录态校验
   img/                    图片资源

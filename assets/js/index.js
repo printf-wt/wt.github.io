@@ -1,61 +1,45 @@
-(function initLogin() {
-    const form = document.getElementById('login-form');
-    const usernameInput = document.getElementById('login-username');
-    const passwordInput = document.getElementById('login-password');
-    const errorEl = document.getElementById('login-error');
-
-    const VALID_USERNAME = '17673680052';
-    const VALID_PASSWORD = 'wangteng20051215';
-    const STORAGE_KEY = 'registeredUser';
-
-    function setError(message) {
-        errorEl.textContent = message || '';
-    }
-
-    function getRegisteredUser() {
-        try {
-            const raw = localStorage.getItem(STORAGE_KEY);
-            if (!raw) return null;
-            const parsed = JSON.parse(raw);
-            if (!parsed || typeof parsed !== 'object') return null;
-            if (typeof parsed.username !== 'string' || typeof parsed.password !== 'string') return null;
-            return { username: parsed.username, password: parsed.password };
-        } catch (e) {
-            return null;
-        }
-    }
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        setError('');
-
-        const username = usernameInput.value.trim();
-        const password = passwordInput.value;
-
-        if (!username || !password) {
-            setError('请输入用户名和密码');
-            return;
-        }
-
-        const registered = getRegisteredUser();
-        const expectedUsername = registered ? registered.username : VALID_USERNAME;
-        const expectedPassword = registered ? registered.password : VALID_PASSWORD;
-
-        if (username !== expectedUsername || password !== expectedPassword) {
-            setError('账号或密码错误');
-            passwordInput.value = '';
-            passwordInput.focus();
-            return;
-        }
-
-        try {
-            localStorage.setItem('loggedIn', '1');
-        } catch (e) {
-            // localStorage 不可用时也允许进入
-        }
-
-        window.location.href = 'index.html';
+function showSection(sectionId) {
+    // 隐藏所有内容区域
+    document.querySelectorAll('section').forEach((section) => {
+        section.style.display = 'none';
     });
+    // 显示被点击按钮对应的内容区域
+    document.getElementById(sectionId).style.display = 'block'; // 显示被选中的目标区域
+}
 
-    usernameInput.focus();
-})();
+function getSectionIdFromHash() {
+    const hash = window.location.hash || '';
+    const sectionId = hash.startsWith('#') ? hash.slice(1) : hash;
+    return sectionId;
+}
+
+function syncSectionFromHash() {
+    const sectionId = getSectionIdFromHash();
+    if (sectionId && document.getElementById(sectionId)) {
+        showSection(sectionId);
+        return;
+    }
+    // 默认进入页面时先展示“学历信息”
+    if (document.getElementById('education')) {
+        showSection('education');
+    }
+}
+
+document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[data-section]');
+    if (!link) return;
+
+    const sectionId = link.getAttribute('data-section');
+    if (!sectionId) return;
+    if (!document.getElementById(sectionId)) return;
+
+    event.preventDefault();
+    window.location.hash = `#${sectionId}`;
+    // hashchange 会触发 syncSectionFromHash，这里不重复 showSection
+});
+
+window.addEventListener('hashchange', syncSectionFromHash);
+document.addEventListener('DOMContentLoaded', syncSectionFromHash);
+
+// 兼容部分环境下的作用域差异，确保 inline onclick 能访问到
+window.showSection = showSection;
