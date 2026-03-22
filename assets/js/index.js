@@ -13,15 +13,18 @@
 function showSection(sectionId) {
     // 隐藏所有内容区域
     document.querySelectorAll('section').forEach((section) => {
+        // 统一隐藏：避免多个 section 同时显示
         section.style.display = 'none';
     });
     // 显示被点击按钮对应的内容区域
+    // 注意：sectionId 来自导航 data-section，要求与 section 的 id 一致
     document.getElementById(sectionId).style.display = 'block'; // 显示被选中的目标区域
 }
 
 function getSectionIdFromHash() {
     // 读取当前 URL 的 hash（#education / #awards / ...）并转换成 sectionId
     const hash = window.location.hash || '';
+    // 去掉开头的 #，得到纯 id（没有 hash 时返回空字符串）
     const sectionId = hash.startsWith('#') ? hash.slice(1) : hash;
     return sectionId;
 }
@@ -29,6 +32,7 @@ function getSectionIdFromHash() {
 function syncSectionFromHash() {
     // 根据 hash 同步当前应展示的 section
     const sectionId = getSectionIdFromHash();
+    // hash 对应的 section 存在时，直接切换
     if (sectionId && document.getElementById(sectionId)) {
         showSection(sectionId);
         return;
@@ -41,11 +45,13 @@ function syncSectionFromHash() {
 
 document.addEventListener('click', (event) => {
     // 事件委托：只处理导航栏里带 data-section 的链接
+    // 使用 closest 兼容点击到 <a> 内部子元素的情况
     const link = event.target.closest('a[data-section]');
     if (!link) return;
 
     const sectionId = link.getAttribute('data-section');
     if (!sectionId) return;
+    // 防御式检查：避免跳到不存在的 section
     if (!document.getElementById(sectionId)) return;
 
     event.preventDefault();
@@ -55,7 +61,5 @@ document.addEventListener('click', (event) => {
 });
 
 window.addEventListener('hashchange', syncSectionFromHash);
+// 首次加载时，根据 hash（或默认值）决定展示哪个 section
 document.addEventListener('DOMContentLoaded', syncSectionFromHash);
-
-// 兼容部分环境下的作用域差异，确保 inline onclick 能访问到
-window.showSection = showSection;

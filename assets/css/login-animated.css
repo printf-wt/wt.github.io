@@ -43,24 +43,6 @@
   background: #000;
 }
 
-.login-left__brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.login-left__logo {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(6px);
-}
-
 .login-left__stage {
   position: relative;
   margin-top: 54px;
@@ -160,17 +142,6 @@
   gap: 8px;
   font-size: 13px;
   color: #333;
-}
-
-.login-link {
-  font-size: 13px;
-  color: #333;
-  text-decoration: underline;
-}
-
-.login-link[aria-disabled="true"] {
-  opacity: 0.55;
-  pointer-events: none;
 }
 
 /* 角色：基础定位 */

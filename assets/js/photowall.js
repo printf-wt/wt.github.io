@@ -16,20 +16,26 @@
  */
 (function () {
     function initPhotoWall() {
+        // 获取照片环形容器（CSS 3D 旋转的根节点）
         const ring = document.querySelector('[data-photowall-ring]');
+        // 页面上没有照片墙时直接退出
         if (!ring) return;
 
         // 1) 统计照片数量并写入 CSS 变量
         const items = Array.from(ring.querySelectorAll('[data-photowall-item]'));
+        // 写入总数量：CSS 用它把 360° 均分成 N 份
         ring.style.setProperty('--count', String(items.length));
         items.forEach((item, index) => {
             // 2) 为每个 item 写入索引变量 --i，CSS 负责算位置
+            // index 从 0 开始：对应第 0 张、第 1 张...
             item.style.setProperty('--i', String(index));
         });
 
+        // 拖拽相关状态
         let isDragging = false;
         let startX = 0;
         let startRotation = 0;
+        // 当前旋转角度（单位：deg）
         let rotation = 0;
 
         const prefersReducedMotion = window.matchMedia &&
@@ -40,20 +46,26 @@
         const setRotation = (value) => {
             // 统一入口：更新内部 rotation 并写回 CSS 变量
             rotation = value;
+            // CSS 读取 --rotation 来做整体 rotateY/rotateZ 等变换
             ring.style.setProperty('--rotation', `${rotation}deg`);
         };
 
         const onPointerDown = (event) => {
             // 开始拖动：记录起点与起始角度
             isDragging = true;
+            // 给容器加 class：可用于拖动时的样式反馈（如光标/过渡）
             ring.classList.add('is-dragging');
+            // 记录指针起始 x
             startX = event.clientX;
+            // 记录拖动开始时的角度
             startRotation = rotation;
+            // 捕获指针：避免拖动过程中指针移出元素导致事件丢失
             ring.setPointerCapture(event.pointerId);
         };
 
         const onPointerMove = (event) => {
             if (!isDragging) return;
+            // 鼠标/手指水平位移
             const deltaX = event.clientX - startX;
             // 旋转灵敏度：每拖动 1px 旋转 0.35deg
             setRotation(startRotation + deltaX * 0.35);
@@ -63,8 +75,10 @@
             // 结束拖动：释放 capture，恢复自动旋转
             if (!isDragging) return;
             isDragging = false;
+            // 移除拖动中的样式状态
             ring.classList.remove('is-dragging');
             try {
+                // 释放指针捕获（不同浏览器可能抛异常，故 try/catch）
                 ring.releasePointerCapture(event.pointerId);
             } catch (e) {
                 // ignore
@@ -81,13 +95,16 @@
             const tick = (now) => {
                 // requestAnimationFrame 循环：根据时间增量推进旋转
                 if (!lastTime) lastTime = now;
+                // 计算本帧相对上一帧的时间差（ms）
                 const delta = now - lastTime;
                 lastTime = now;
 
                 if (!isDragging) {
+                    // 非拖拽状态：按时间差累加自动旋转角度
                     setRotation(rotation + delta * AUTO_ROTATE_DEG_PER_MS);
                 }
 
+                // 继续下一帧
                 requestAnimationFrame(tick);
             };
 
@@ -100,8 +117,10 @@
 
     // DOM ready 兼容：保证在元素存在后再初始化
     if (document.readyState === 'loading') {
+        // 文档仍在加载：等 DOMContentLoaded 再初始化
         document.addEventListener('DOMContentLoaded', initPhotoWall);
     } else {
+        // 文档已就绪：直接初始化
         initPhotoWall();
     }
 })();

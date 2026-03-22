@@ -13,7 +13,9 @@
  */
 (function enforceLogin() {
     try {
+        // 读取登录态：约定值为字符串 '1' 才算已登录
         if (localStorage.getItem('loggedIn') !== '1') {
+            // 未登录：跳转到登录页（用于前端演示的访问控制）
             window.location.href = 'login.html';
         }
     } catch (e) {
