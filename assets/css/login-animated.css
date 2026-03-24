@@ -12,298 +12,304 @@
   - 在桌面端媒体查询中启用 grid-template-columns: var(--shell-left) var(--shell-right)
 */
 
+/* ===== 页面外层布局：让整个“左右分栏盒子”居中显示 ===== */
 .login-layout {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  position: relative;
-  z-index: 9999;
+  min-height: 100vh; /* 至少占满一屏高度 */
+  display: flex; /* 用 flex 把外层壳居中 */
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
+  padding: 24px; /* 页面边缘留白（小屏更舒服） */
+  position: relative; /* 建立层叠上下文，配合 z-index */
+  z-index: 9999; /* 确保主内容在背景动效之上 */
 }
 
-/* 一个统一的“外层盒子”：左右等分 */
+/* ===== 外层壳：控制左右分栏比例与圆角裁切 ===== */
 .login-shell {
-  width: min(1100px, 92vw);
-  display: grid;
-  --shell-left: 5.5fr;
-  --shell-right: 4.5fr;
-  grid-template-columns: 1fr;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+  width: min(1100px, 92vw); /* 外层盒子宽度：大屏上限 1100，小屏随视口缩放 */
+  display: grid; /* 用 grid 做左右分栏（移动端可变为单列） */
+  --shell-left: 5.5fr; /* 左栏占比（桌面端启用） */
+  --shell-right: 4.5fr; /* 右栏占比（桌面端启用） */
+  grid-template-columns: 1fr; /* 默认单列（移动端/小屏） */
+  border-radius: 16px; /* 外层大圆角 */
+  overflow: hidden; /* 裁切内部内容：保证圆角生效 */
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22); /* 盒子投影：提升层级 */
 }
 
+/* ===== 左侧：黑底卡通舞台（纯展示/互动，不放表单） ===== */
 .login-left {
-  display: flex;
-  position: relative;
-  overflow: hidden;
-  padding: 48px;
-  color: #fff;
-  background: #000;
+  display: flex; /* 左侧内部使用 flex（舞台可按需对齐） */
+  position: relative; /* 作为角色绝对定位/内部层级的参考 */
+  overflow: hidden; /* 防止角色/动画溢出 */
+  padding: 48px; /* 左侧留白 */
+  color: #fff; /* 左侧文字默认白色（若有文案） */
+  background: #000; /* 左侧纯黑背景：突出彩色角色 */
 }
 
+/* 舞台容器：角色绝对定位的参考系 */
 .login-left__stage {
-  position: relative;
-  margin-top: 54px;
-  width: 560px;
-  max-width: 100%;
-  height: 420px;
+  position: relative; /* 角色绝对定位参考系 */
+  margin-top: 54px; /* 舞台与上边缘留出空间 */
+  width: 560px; /* 舞台基准宽度 */
+  max-width: 100%; /* 小屏不超过容器宽度 */
+  height: 420px; /* 舞台高度：承载角色 */
 }
 
+/* ===== 右侧：表单区域（具体输入控件样式在 login.css） ===== */
 .login-right {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 48px;
-  background: #fff;
+  display: flex; /* 右侧用 flex 把表单居中 */
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
+  padding: 48px; /* 右侧留白 */
+  background: #fff; /* 右侧白底：承载表单 */
 }
 
-/* 右侧不再需要“卡片背景/阴影”，保持在白色半区内即可 */
+/* 右侧不再需要“卡片背景/阴影”，保持在白色半区内即可（避免双层阴影） */
 .login-right .login-card {
-  max-width: 460px;
-  background: transparent;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
+  max-width: 460px; /* 右侧表单最大宽度 */
+  background: transparent; /* 去掉卡片底色：避免与右侧白底叠加 */
+  box-shadow: none; /* 去掉卡片阴影：避免双层投影 */
+  border-radius: 0; /* 右侧区域已圆角裁切，内部不需要再圆角 */
+  padding: 0; /* padding 由右侧区域负责 */
 }
 
-/* 移动端品牌（左侧隐藏时显示） */
+/* ===== 移动端品牌（左侧隐藏时显示） ===== */
 .login-mobile-brand {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin: 0 0 18px;
+  display: flex; /* logo + 品牌名同行 */
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
+  gap: 10px; /* logo 与文字间距 */
+  margin: 0 0 18px; /* 与标题间距 */
 }
 
 .login-mobile-brand__logo {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  background: rgba(0, 0, 0, 0.06);
+  width: 34px; /* logo 容器宽 */
+  height: 34px; /* logo 容器高 */
+  border-radius: 10px; /* 圆角方块 */
+  display: grid; /* 用 grid 居中图标 */
+  place-items: center; /* 水平+垂直居中 */
+  background: rgba(0, 0, 0, 0.06); /* 浅灰底，和白底区分 */
 }
 
 .login-mobile-brand__name {
-  font-weight: 700;
-  color: #222;
+  font-weight: 700; /* 品牌名加粗 */
+  color: #222; /* 深灰文字 */
 }
 
 /* 右侧卡片保持原风格，但更像“产品登录” */
 .login-card #login-title {
-  font-size: 28px;
-  letter-spacing: -0.02em;
-  margin-bottom: 8px;
+  font-size: 28px; /* 登录标题更大更像产品页 */
+  letter-spacing: -0.02em; /* 微调字间距，让标题更紧凑 */
+  margin-bottom: 8px; /* 与提示文案间距 */
 }
 
 .login-card .login-tip {
-  margin-bottom: 18px;
+  margin-bottom: 18px; /* 提示文案与表单主体间距 */
 }
 
+/* ===== 密码输入：右侧“显示/隐藏”按钮的定位容器 ===== */
 .login-password {
-  position: relative;
+  position: relative; /* 作为“显示/隐藏”按钮的绝对定位参考 */
 }
 
 .login-input--password {
-  padding-right: 64px;
+  padding-right: 64px; /* 右侧预留空间：避免文字被 toggle 按钮遮挡 */
 }
 
 .login-password__toggle {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  border: 0;
-  background: transparent;
-  color: #555;
-  cursor: pointer;
-  padding: 6px 8px;
-  border-radius: 8px;
-  font-size: 13px;
+  position: absolute; /* 叠在密码输入框右侧 */
+  right: 10px; /* 距离右侧 10px */
+  top: 50%; /* 垂直居中定位 */
+  transform: translateY(-50%); /* 把按钮自身中心对齐到 50% */
+  border: 0; /* 去掉默认边框 */
+  background: transparent; /* 透明背景：像内嵌控件 */
+  color: #555; /* 文案颜色 */
+  cursor: pointer; /* 鼠标提示可点击 */
+  padding: 6px 8px; /* 点击热区 */
+  border-radius: 8px; /* hover 背景的圆角 */
+  font-size: 13px; /* 小号文字 */
 }
 
 .login-password__toggle:hover {
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.06); /* hover 浅底色：反馈 */
 }
 
 .login-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 2px;
+  display: flex; /* 行内布局：复选框/辅助操作等 */
+  align-items: center; /* 垂直居中 */
+  justify-content: space-between; /* 两端对齐 */
+  gap: 12px; /* 子项间距 */
+  margin-top: 2px; /* 与上方输入框的微间距 */
 }
 
 .login-checkbox {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: #333;
+  display: inline-flex; /* checkbox 与文字同行 */
+  align-items: center; /* 垂直居中 */
+  gap: 8px; /* checkbox 与文案间距 */
+  font-size: 13px; /* 小字号 */
+  color: #333; /* 深灰文字 */
 }
 
-/* 角色：基础定位 */
+/* ===== 角色：基础定位与眼睛区域（由 JS 做视线跟随/眨眼等） ===== */
 .character {
-  position: absolute;
-  bottom: 0;
-  transform-origin: bottom center;
-  transition: transform 700ms ease-in-out, height 700ms ease-in-out;
+  position: absolute; /* 角色叠放在舞台上 */
+  bottom: 0; /* 角色底部贴舞台底部 */
+  transform-origin: bottom center; /* 变形/倾斜围绕脚底中心点 */
+  transition: transform 700ms ease-in-out, height 700ms ease-in-out; /* 角色动作过渡更柔和 */
 }
 
 .character__eyes {
-  position: absolute;
-  display: flex;
-  gap: 18px;
-  left: 46px;
-  top: 40px;
-  transition: transform 200ms ease-out;
+  position: absolute; /* 眼睛组相对角色定位 */
+  display: flex; /* 两只眼睛横向排布 */
+  gap: 18px; /* 眼睛间距 */
+  left: 46px; /* 眼睛组水平位置（按角色造型微调） */
+  top: 40px; /* 眼睛组垂直位置 */
+  transition: transform 200ms ease-out; /* 眼睛组位移的轻过渡（若有） */
 }
 
 .character__eyes--pupil-only {
-  gap: 22px;
+  gap: 22px; /* 只有瞳孔点的角色，间距稍大 */
 }
 
 .eye {
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  background: #fff;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  transition: height 150ms ease;
+  width: 18px; /* 眼球宽 */
+  height: 18px; /* 眼球高 */
+  border-radius: 999px; /* 圆形 */
+  background: #fff; /* 白眼球 */
+  display: grid; /* 用 grid 居中瞳孔 */
+  place-items: center; /* 居中 */
+  overflow: hidden; /* 眨眼时裁切内部 */
+  transition: height 150ms ease; /* 通过高度变化实现眨眼 */
 }
 
 .eye .pupil {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: #2d2d2d;
-  transform: translate(var(--px, 0px), var(--py, 0px));
-  transition: transform 100ms ease-out;
+  width: 7px; /* 瞳孔宽 */
+  height: 7px; /* 瞳孔高 */
+  border-radius: 999px; /* 圆形 */
+  background: #2d2d2d; /* 深色瞳孔 */
+  transform: translate(var(--px, 0px), var(--py, 0px)); /* JS 写入 --px/--py，实现跟随移动 */
+  transition: transform 100ms ease-out; /* 跟随时更顺滑 */
 }
 
 .eye.is-blinking {
-  height: 2px;
+  height: 2px; /* 眨眼：把眼球高度压扁成一条线 */
 }
 
 .eye.is-blinking .pupil {
-  opacity: 0;
+  opacity: 0; /* 眨眼时隐藏瞳孔 */
 }
 
 .pupil-only {
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
-  background: #2d2d2d;
-  transform: translate(var(--px, 0px), var(--py, 0px));
-  transition: transform 100ms ease-out;
+  width: 12px; /* 仅瞳孔点：尺寸更大一点，增强可见性 */
+  height: 12px; /* 同上 */
+  border-radius: 999px; /* 圆形 */
+  background: #2d2d2d; /* 深色 */
+  transform: translate(var(--px, 0px), var(--py, 0px)); /* JS 写入偏移变量实现跟随 */
+  transition: transform 100ms ease-out; /* 跟随过渡 */
 }
 
-/* 具体角色外观（尽量贴近参考的比例） */
+/* ===== 具体角色外观（颜色/尺寸/层级） ===== */
 .character--purple {
-  left: 78px;
-  width: 180px;
-  height: 400px;
-  background: #6c3ff5;
-  border-radius: 10px 10px 0 0;
-  z-index: 1;
+  left: 78px; /* 水平位置：按舞台布局微调 */
+  width: 180px; /* 紫色角色宽度 */
+  height: 400px; /* 紫色角色高度（JS 可能动态调整） */
+  background: #6c3ff5; /* 紫色 */
+  border-radius: 10px 10px 0 0; /* 顶部圆角，底部直角贴地 */
+  z-index: 1; /* 层级：决定叠放顺序 */
 }
 
 .character--black {
-  left: 250px;
-  width: 120px;
-  height: 310px;
-  background: #2d2d2d;
-  border-radius: 8px 8px 0 0;
-  z-index: 2;
+  left: 250px; /* 水平位置 */
+  width: 120px; /* 黑色角色宽度 */
+  height: 310px; /* 黑色角色高度 */
+  background: #2d2d2d; /* 黑灰色 */
+  border-radius: 8px 8px 0 0; /* 顶部圆角 */
+  z-index: 2; /* 层级：覆盖紫色一部分 */
 }
 
 .character--black .character__eyes {
-  left: 26px;
-  top: 32px;
-  gap: 14px;
+  left: 26px; /* 黑色角色眼睛水平位置 */
+  top: 32px; /* 黑色角色眼睛垂直位置 */
+  gap: 14px; /* 黑色眼距稍小 */
 }
 
 .character--black .eye {
-  width: 16px;
-  height: 16px;
+  width: 16px; /* 黑色眼球更小 */
+  height: 16px; /* 同上 */
 }
 
 .character--black .eye .pupil {
-  width: 6px;
-  height: 6px;
+  width: 6px; /* 黑色瞳孔更小 */
+  height: 6px; /* 同上 */
 }
 
 .character--orange {
-  left: 0px;
-  width: 240px;
-  height: 200px;
-  background: #ff9b6b;
-  border-radius: 120px 120px 0 0;
-  z-index: 3;
+  left: 0px; /* 靠左放置 */
+  width: 240px; /* 橙色角色宽度 */
+  height: 200px; /* 橙色角色高度 */
+  background: #ff9b6b; /* 橙色 */
+  border-radius: 120px 120px 0 0; /* 半圆顶造型 */
+  z-index: 3; /* 层级 */
 }
 
 .character--orange .character__eyes {
-  left: 82px;
-  top: 90px;
+  left: 82px; /* 橙色角色眼睛水平位置 */
+  top: 90px; /* 橙色角色眼睛垂直位置 */
 }
 
 .character--yellow {
-  left: 320px;
-  width: 140px;
-  height: 230px;
-  background: #e8d754;
-  border-radius: 70px 70px 0 0;
-  z-index: 4;
+  left: 320px; /* 右侧放置 */
+  width: 140px; /* 黄色角色宽度 */
+  height: 230px; /* 黄色角色高度 */
+  background: #e8d754; /* 黄色 */
+  border-radius: 70px 70px 0 0; /* 半圆顶造型 */
+  z-index: 4; /* 层级最高：最靠前 */
 }
 
 .character--yellow .character__eyes {
-  left: 52px;
-  top: 40px;
-  gap: 16px;
+  left: 52px; /* 黄色眼睛水平位置 */
+  top: 40px; /* 黄色眼睛垂直位置 */
+  gap: 16px; /* 眼距 */
 }
 
 .character__mouth {
-  position: absolute;
-  left: 40px;
-  top: 88px;
-  width: 80px;
-  height: 4px;
-  border-radius: 999px;
-  background: #2d2d2d;
+  position: absolute; /* 嘴巴相对角色定位 */
+  left: 40px; /* 水平位置 */
+  top: 88px; /* 垂直位置 */
+  width: 80px; /* 嘴巴长度 */
+  height: 4px; /* 嘴巴厚度 */
+  border-radius: 999px; /* 圆角线条 */
+  background: #2d2d2d; /* 深色嘴巴 */
 }
 
-/* 大屏显示两栏 */
+/* ===== 响应式：大屏显示两栏；小屏上下排列 ===== */
 @media (min-width: 1024px) {
   .login-shell {
-    grid-template-columns: var(--shell-left) var(--shell-right);
+    grid-template-columns: var(--shell-left) var(--shell-right); /* 桌面端启用左右两栏 */
   }
 
   .login-mobile-brand {
-    display: none;
+    display: none; /* 桌面端有左侧舞台，不需要移动端品牌区 */
   }
 }
 
 @media (max-width: 1023px) {
   /* 小屏：仍在同一个盒子里，上下排列 */
   .login-right {
-    padding: 28px;
+    padding: 28px; /* 小屏缩小留白 */
   }
 
   .login-left {
-    padding: 28px;
+    padding: 28px; /* 小屏缩小留白 */
   }
 
   .login-left__stage {
-    margin-top: 24px;
-    height: 360px;
+    margin-top: 24px; /* 小屏减少顶部间距 */
+    height: 360px; /* 小屏舞台高度略减 */
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* 无障碍：用户偏好减少动画时，关闭过渡避免不适 */
   .character,
   .character__eyes,
   .eye .pupil,

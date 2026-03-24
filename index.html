@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- 字符编码：确保中文不乱码 -->
     <meta charset="utf-8">
+    <!-- 页面标题：浏览器标签栏/收藏夹显示 -->
     <title>个人博客-王腾</title>
     <!--
       样式说明：
@@ -12,18 +14,28 @@
       - 本页允许“未登录访问”（不引用 auth.js）
       - 需要登录保护的页面（如分享/照片墙/文章）在各自页面引用 auth.js
     -->
+    <!-- 主页主样式：导航栏 + section 卡片 + 简介卡片 -->
     <link rel="stylesheet" href="assets/css/index.css">
+    <!-- 背景动效：body 添加 class="background" 后启用 -->
     <link rel="stylesheet" href="assets/css/background.css">
 </head>
 <body class="background">
+    <!--
+        body class="background"
+        - 作用：启用 background.css 定义的背景纹理/动画
+        - 注意：这是纯 CSS 动效，不依赖 JS
+    -->
+
     <!-- 右上角入口：外来访问先看主页，需要时再进入登录页 -->
     <a class="login-entry" href="login.html" target="_self">去登陆</a>
 
     <!-- 个人信息简介区：左头像 + 右侧基本信息 -->
     <div class="introduction">
+        <!-- 左栏：头像区域（固定宽度，让整体更稳定） -->
         <div class="left-column">
             <img src="assets/img/image_self.jpg" alt="个人头像" width="200" height="200">
         </div>
+        <!-- 右栏：文字信息（自适应剩余宽度） -->
         <div class="right-column">
             <p>个人信息</p>
             <p>姓名：王腾</p>
@@ -41,6 +53,12 @@
             - 带 data-section 的链接用于“单页 section 切换”（由 assets/js/index.js 处理）
             - sharing/photowall 是独立页面，直接跳转
         -->
+        <!--
+            导航容器（id="daohang"）：
+            - 样式来自 assets/css/index.css
+            - 主页内部切换：使用 a[data-section] + hash（由 assets/js/index.js 控制）
+            - 独立页面：sharing.html / photowall.html 直接跳转
+        -->
         <nav id="daohang">
         <a href="#education" data-section="education">学历信息</a>
         <a href="#awards" data-section="awards">获奖经历</a>
@@ -50,7 +68,11 @@
         <a href="photowall.html" target="_self">照片墙</a>
     </nav>
 
-    <!-- 学历信息内容区域，默认隐藏 -->
+    <!--
+        学历信息 section：
+        - id 必须与导航 data-section 一致
+        - 默认显示/隐藏由 CSS 与 index.js 控制
+    -->
     <section id="education">
         <h2>学历信息</h2>
         <p>小学：小学</p>
@@ -59,7 +81,7 @@
         <p>大学：中南林业科技大学计算机与数学学院</p>
     </section>
 
-    <!-- 获奖经历内容区域，默认隐藏 -->
+    <!-- 获奖经历 section：同上，由导航切换显示 -->
     <section id="awards">
         <h2>获奖经历</h2>
         <p>2025年1月，获得2025年1月的奖</p>
@@ -69,12 +91,13 @@
         <p>2025年12月，获得2025年12月的奖。</p>
     </section>
 
-    <!-- 科研经历内容区域，默认隐藏 -->
+    <!-- 科研经历 section -->
     <section id="research">
         <h2>科研经历</h2>
         <p>2026年2月，发表《基于朋友圈可见性变化的学术社交关系网络断裂机制研究》于《joker of academic》</p>
         <p>2026年3月，发表《小猪佩奇 vs 猪猪侠烹饪对比应用研究：基于跨IP对照建 模的虚拟角色食品工程玄学分析》于《joker of academic》</p>
     </section>
+    <!-- 联系方式 section -->
     <section id="contact">
         <h2>联系方式</h2>
         <p>邮箱：wangteng@scuft.edu.cn</p>
@@ -84,6 +107,10 @@
             主页交互脚本：
             - 负责 hash 与 section 显示/隐藏同步
             - 支持点击导航、刷新直达、前进后退
+        -->
+        <!--
+            defer：等待 HTML 解析完再执行脚本
+            - 脚本负责：导航点击 → 更新 hash → 显示对应 section
         -->
         <script src="assets/js/index.js" defer></script>
 </body>

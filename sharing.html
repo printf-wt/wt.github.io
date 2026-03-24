@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- 字符编码 -->
     <meta charset="utf-8">
+    <!-- 视口设置 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 页面标题 -->
     <title>经验分享 - 王腾</title>
         <!--
             样式说明：
@@ -30,11 +33,17 @@
         <a href="photowall.html" target="_self">照片墙</a>
     </nav>
 
-    <!-- 文章列表：每个条目链接到 posts/ 下的独立文章页 -->
+    <!--
+        文章列表：
+        - 每个 <article.post> 是一张可点击卡片
+        - 内部用 <a.post-link> 包裹，点击跳到 posts/ 下的文章详情页
+        - 样式由 posts.css 控制
+    -->
     <section id="sharing">
         <h2>经验分享</h2>
 
         <div class="posts">
+            <!-- 文章卡片 1：实验报告写作方法 -->
             <article class="post">
                 <a class="post-link" href="posts/post-lab-report.html">
                     <h3 class="post-title">学习笔记：如何高效写实验报告</h3>
@@ -43,6 +52,7 @@
                 </a>
             </article>
 
+            <!-- 文章卡片 2：项目协作分工复盘 -->
             <article class="post">
                 <a class="post-link" href="posts/post-teamwork.html">
                     <h3 class="post-title">踩坑记录：第一次做项目怎么分工</h3>

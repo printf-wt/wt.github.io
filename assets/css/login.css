@@ -6,95 +6,109 @@
     - 登录页的黑白分栏盒子/左侧卡通舞台等布局在 login-animated.css
 */
 
+/* ===== 页面基础：字体、背景、默认边距 ===== */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #ffffff;
+    font-family: Arial, sans-serif; /* 基础字体：与主页保持一致 */
+    margin: 0; /* 清除默认外边距 */
+    padding: 0; /* 清除默认内边距 */
+    background: #ffffff; /* 页面底色：白色，便于承载卡片 */
 }
 
+/*
+    统一登录页容器：
+    - 让表单区域在视口中居中
+    - padding 给小屏留白（避免贴边）
+*/
 .login-page {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    position: relative;
-    z-index: 9999;
+    min-height: 100vh; /* 至少占满一屏高度 */
+    display: flex; /* 用 flex 实现表单整体居中 */
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    padding: 24px; /* 小屏留白：避免贴边 */
+    position: relative; /* 建立层叠上下文（配合 z-index） */
+    z-index: 9999; /* 确保表单在背景动效之上 */
 }
 
+/* 表单“卡片”容器：背景/圆角/阴影，用于承载输入框与按钮 */
 .login-card {
-    width: 100%;
-    max-width: 420px;
-    background: rgba(248, 250, 255, 0.94);
-    border-radius: 12px;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
-    padding: 22px;
+    width: 100%; /* 小屏占满可用宽度 */
+    max-width: 420px; /* 大屏限制最大宽度，避免过宽 */
+    background: rgba(248, 250, 255, 0.94); /* 半透明卡片背景：与背景纹理融合 */
+    border-radius: 12px; /* 卡片圆角 */
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16); /* 投影：增强层次 */
+    padding: 22px; /* 内边距：内容不贴边 */
 }
 
+/* 标题与提示文案（login.html / register.html 可能复用 id/class） */
 #login-title {
-    margin: 0 0 8px;
-    color: #333;
-    font-size: 22px;
-    justify-self: center;
+    margin: 0 0 8px; /* 标题下方留出间距 */
+    color: #333; /* 标题颜色：深灰 */
+    font-size: 22px; /* 标题字号 */
+    justify-self: center; /* 若父容器是 grid，可用于水平居中 */
 }
 
 .login-tip {
-    margin: 0 0 14px;
-    color: #666;
-    line-height: 1.6;
-    font-size: 14px;
-    justify-self: center;
+    margin: 0 0 14px; /* 与表单区域留距离 */
+    color: #666; /* 提示文案更浅 */
+    line-height: 1.6; /* 行距：更舒适 */
+    font-size: 14px; /* 提示字号略小 */
+    justify-self: center; /* 与标题一致，便于居中 */
 }
 
+/* 表单布局：用 grid 统一控制 label/input/error 的垂直间距 */
 .login-form {
-    display: grid;
-    gap: 10px;
+    display: grid; /* 用 grid 让 label/input/错误提示自然按行排布 */
+    gap: 10px; /* 行间距：统一表单节奏 */
 }
 
+/* label：给每个输入框提供语义说明 */
 .login-label {
-    color: #333333;
-    font-size: 14px;
+    color: #333333; /* label 深色，清晰可读 */
+    font-size: 14px; /* label 字号 */
 }
 
+/* 输入框：统一 padding/边框/圆角，focus 时强调边框 */
 .login-input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px 12px;
-    border: 1px solid rgba(0, 0, 0, 0.16);
-    border-radius: 8px;
-    font-size: 14px;
-    outline: none;
+    width: 100%; /* 输入框占满容器宽度 */
+    box-sizing: border-box; /* 包含 padding/border，避免溢出 */
+    padding: 10px 12px; /* 输入区域留白 */
+    border: 1px solid rgba(0, 0, 0, 0.16); /* 轻边框 */
+    border-radius: 8px; /* 圆角输入框 */
+    font-size: 14px; /* 输入文字字号 */
+    outline: none; /* 去掉默认 outline，focus 时用 border-color 提示 */
 }
 
 .login-input:focus {
-    border-color: rgba(56, 109, 214, 0.60);
+    border-color: rgba(56, 109, 214, 0.60); /* focus 高亮：提示当前输入 */
 }
 
+/* 错误提示：预留高度防止布局跳动 */
 .login-error {
-    margin: 2px 0 0;
-    min-height: 18px;
-    color: #b00020;
-    font-size: 13px;
+    margin: 2px 0 0; /* 与上方控件轻微分隔 */
+    min-height: 18px; /* 预留高度：出现/消失时不抖动 */
+    color: #b00020; /* 错误色：偏红 */
+    font-size: 13px; /* 错误字号略小 */
 }
 
+/* 主按钮：hover 时加深背景，提供可点击反馈 */
 .login-button {
-    background-color: rgba(46, 102, 220, 0.18);
-    color: #1f2330;
-    border: none;
-    padding: 10px 16px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 8px;
-    transition: background-color 0.3s;
+    background-color: rgba(46, 102, 220, 0.18); /* 默认按钮底色：淡蓝 */
+    color: #1f2330; /* 按钮文字颜色 */
+    border: none; /* 移除默认边框 */
+    padding: 10px 16px; /* 按钮内边距 */
+    cursor: pointer; /* 鼠标提示可点击 */
+    font-size: 16px; /* 按钮字号 */
+    border-radius: 8px; /* 按钮圆角 */
+    transition: background-color 0.3s; /* hover 过渡 */
 }
 
 .login-button:hover {
-    background-color: rgba(46, 102, 220, 0.28);
+    background-color: rgba(46, 102, 220, 0.28); /* hover 加深：明确反馈 */
 }
 
+/* 底部跳转链接（去注册/返回等） */
 .login-register {
-    color: #333;
-    font-size: 13px;
-    text-decoration: underline;
+    color: #333; /* 链接文字颜色 */
+    font-size: 13px; /* 链接字号略小 */
+    text-decoration: underline; /* 下划线提示可点击 */
 }

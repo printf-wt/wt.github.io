@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- 字符编码 -->
     <meta charset="utf-8">
+    <!-- 视口设置 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 页面标题 -->
     <title>踩坑记录：第一次做项目怎么分工</title>
         <!--
             样式说明：
@@ -18,6 +21,11 @@
     <link rel="stylesheet" href="../assets/css/posts.css">
 </head>
 <body class="background">
+    <!--
+        导航：
+        - 文章页位于 posts/ 子目录，所以资源与链接使用 ../ 前缀
+        - 点击“学历信息/获奖经历...”会跳回主页对应 hash
+    -->
     <nav id="daohang">
         <a href="../index.html#education">学历信息</a>
         <a href="../index.html#awards">获奖经历</a>
@@ -27,11 +35,12 @@
         <a href="../photowall.html" target="_self">照片墙</a>
     </nav>
 
-    <!-- 文章正文区域 -->
+    <!-- 文章正文区域：posts.css 的 .post-page 负责排版与最大宽度控制 -->
     <main class="post-page">
         <h1>踩坑记录：第一次做项目怎么分工</h1>
         <p class="meta">时间：2026-03-10｜关键词：项目协作 / 复盘</p>
 
+        <!-- content：正文内容容器（段落/列表等样式由 posts.css 控制） -->
         <div class="content">
             <p>第一次做团队项目最容易踩的坑是：按“人”分工（A 写前端、B 写后端、C 写文档），结果接口对不上、合起来全是冲突。</p>
             <p>更稳的做法是按“模块 + 接口”分：先把页面/接口/数据结构写清楚，谁负责哪个模块就一目了然。接口先定下来，代码才好并行推进。</p>
@@ -41,7 +50,7 @@
         </div>
     </main>
 
-    <!-- 访问控制：未登录访问本页会被重定向到登录页 -->
+    <!-- 访问控制：未登录访问本页会被重定向到登录页（../login.html） -->
     <script src="../assets/js/auth.js" defer></script>
 </body>
 </html>

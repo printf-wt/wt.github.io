@@ -6,49 +6,60 @@
     - 本文件放注册页特有的字段组/选项排版等差异
 */
 
+/* ===== 注册页标题：与登录页标题层级一致 ===== */
 .register-title {
-    margin: 0 0 8px;
-    color: #333;
-    font-size: 22px;
+    margin: 0 0 8px; /* 标题与下方提示/表单的间距 */
+    color: #333; /* 标题颜色 */
+    font-size: 22px; /* 标题字号 */
 }
 
+/*
+    字段组：用 fieldset/legend 组织“单选/多选”等一组字段
+    - 边框 + 圆角提供分组边界
+    - grid gap 统一组内间距
+*/
 .register-fieldset {
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 10px 12px;
-    display: grid;
-    gap: 8px;
+    border: 1px solid #eee; /* 边框：表示分组范围 */
+    border-radius: 10px; /* 圆角：与整体卡片风格一致 */
+    padding: 10px 12px; /* 内边距：legend/选项不贴边 */
+    display: grid; /* 组选项用网格纵向排布 */
+    gap: 8px; /* 组选项之间的间距 */
 }
 
+/* fieldset 的说明文字（legend） */
 .register-legend {
-    padding: 0 6px;
-    font-size: 13px;
-    color: #555;
+    padding: 0 6px; /* 给 legend 左右留白，避免压住边框 */
+    font-size: 13px; /* 说明文字略小 */
+    color: #555; /* 颜色稍浅 */
 }
 
+/* 单个选项行：label + input 对齐 */
 .register-option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    color: #333;
+    display: flex; /* 让 input 与文字在同一行 */
+    align-items: center; /* 垂直居中对齐 */
+    gap: 8px; /* input 与文案间距 */
+    font-size: 14px; /* 选项字号 */
+    color: #333; /* 选项文字颜色 */
 }
 
+/* 勾选“同意协议”等条目 */
 .register-agreement {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    color: #333;
+    display: flex; /* 协议勾选与文案同行 */
+    align-items: center; /* 垂直居中 */
+    gap: 8px; /* checkbox 与文案间距 */
+    font-size: 14px; /* 协议字号 */
+    color: #333; /* 协议文案颜色 */
 }
 
+/* 禁用态：避免未勾选/未填写完整时误提交 */
 #register-submit:disabled {
-    opacity: 0.55;
-    cursor: not-allowed;
+    opacity: 0.55; /* 禁用态变淡：提示不可用 */
+    cursor: not-allowed; /* 鼠标样式提示禁用 */
 }
 
+/* 返回登录/返回上一页的链接样式 */
 .register-back {
-    color: #333;
-    font-size: 13px;
-    text-decoration: underline;
+    color: #333; /* 链接颜色 */
+    font-size: 13px; /* 链接字号 */
+    text-decoration: underline; /* 下划线强调可点击 */
 }

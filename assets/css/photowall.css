@@ -1,96 +1,108 @@
 /*
-    照片墙：3D 环形 + 拖动旋转
+    photowall.css
+    ------------
+    目标：实现“3D 环形照片墙 + 拖动旋转”的视觉与交互反馈。
 
-    与 JS 的配合点：
-    - JS 会写入 ring 的 --count / 每个 item 的 --i / ring 的 --rotation
-    - CSS 使用这些变量计算每张图片的 rotateY(...) / translateZ(...)
+    核心思路：
+    - 使用 3D 透视（perspective）+ preserve-3d 让子元素保持 3D 变换。
+    - 每张图片（.item）按索引 --i 均匀分布在圆周上：
+        rotateY(i * 360/count) 后再 translateZ(radius)
+      这相当于把图片沿 Y 轴旋转到指定角度，再“推”到圆环半径处。
+
+    与 JS 的配合点（由 assets/js/photowall.js 写入）：
+    - --count：图片数量，用来计算每张图片的角度间隔。
+    - --i：每个 .item 的索引（0..count-1）。
+    - --rotation：当前环整体旋转角度（拖拽时更新）。
 
     交互提示：
-    - .ring 使用 cursor: grab + touch-action: none，配合 pointer 事件拖拽
+    - .ring 使用 cursor: grab/grabbing + touch-action: none，配合 Pointer 事件实现拖拽旋转。
 */
 
+/* ===== 全局 reset：避免默认 margin/padding 干扰布局 ===== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; /* 清除默认外边距，避免浏览器默认样式干扰布局 */
+    padding: 0; /* 清除默认内边距 */
+    box-sizing: border-box; /* 让 width/height 包含 padding/border，布局更可控 */
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    perspective: 1200px;
-    overflow: hidden;
+    display: flex; /* 使用弹性布局，便于把舞台水平/垂直居中 */
+    justify-content: center; /* 主轴居中（水平居中） */
+    align-items: center; /* 交叉轴居中（垂直居中） */
+    min-height: 100vh; /* 至少占满一屏高度 */
+    perspective: 1200px; /* 透视深度：决定 3D 远近的“夸张程度” */
+    overflow: hidden; /* 隐藏溢出，避免 3D 内容造成滚动条 */
     padding-top: 64px; /* 预留给 fixed 导航栏，避免遮挡内容 */
 }
 
 .stage {
-    width: min(1100px, 92vw);
-    height: min(720px, calc(86vh - 64px));
-    display: grid;
-    place-items: center;
-    transform-style: preserve-3d;
+    width: min(1100px, 92vw); /* 舞台宽度：大屏上限 1100，小屏按视口缩放 */
+    height: min(720px, calc(86vh - 64px)); /* 舞台高度：扣掉导航栏预留高度 */
+    display: grid; /* 使用 grid 便于把 ring 放在正中 */
+    place-items: center; /* grid 的水平+垂直居中 */
+    transform-style: preserve-3d; /* 保留子元素 3D 变换（不拍平） */
 }
 
 .ring {
-    --count: 1;
-    --radius: 420px;
-    --tilt: -10deg;
-    --rotation: 0deg;
+    --count: 1; /* 默认图片数量（JS 初始化时会覆盖） */
+    --radius: 420px; /* 环半径：图片离中心的 Z 距离 */
+    --tilt: -10deg; /* 俯视倾角：绕 X 轴旋转，制造“仰俯视”效果 */
+    --rotation: 0deg; /* 整体绕 Y 轴旋转角：拖拽/自动旋转会更新 */
 
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transform: rotateX(var(--tilt)) rotateY(var(--rotation));
+    position: relative; /* 作为 .item 绝对定位的参考容器 */
+    width: 100%; /* 填满舞台宽度 */
+    height: 100%; /* 填满舞台高度 */
+    transform-style: preserve-3d; /* 保留 .item 的 3D 变换 */
+    transform: rotateX(var(--tilt)) rotateY(var(--rotation)); /* 先俯视倾斜，再做水平旋转 */
 
-    cursor: grab;
-    touch-action: none;
-    user-select: none;
+    cursor: grab; /* 鼠标提示：可拖拽 */
+    touch-action: none; /* 禁用浏览器默认手势（滚动/缩放），让 pointer 拖拽更稳定 */
+    user-select: none; /* 拖拽过程中不选中文字/图片 */
 }
 
+/* JS 在拖拽期间会切换该类，用来提供“正在拖拽”的光标反馈 */
 .ring.is-dragging {
-    cursor: grabbing;
+    cursor: grabbing; /* 拖动中光标反馈 */
 }
 
 .ring .item {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: min(260px, 42vw);
-    height: min(260px, 42vw);
-    transform-style: preserve-3d;
+    position: absolute; /* 绝对定位：每个 item 由 transform 放到圆环上 */
+    top: 50%; /* 先把定位点放到容器中线 */
+    left: 50%; /* 同上 */
+    width: min(260px, 42vw); /* 卡片宽度：大屏上限 260，小屏随视口缩放 */
+    height: min(260px, 42vw); /* 卡片高度：保持近似正方形 */
+    transform-style: preserve-3d; /* 让内部 img/反射等在 3D 下表现更自然 */
 
     transform:
-        translate(-50%, -50%)
-        rotateY(calc(var(--i) * (360deg / var(--count))))
-        translateZ(var(--radius));
+        translate(-50%, -50%) /* 把 item 的定位中心对齐到 ring 的中心 */
+        rotateY(calc(var(--i) * (360deg / var(--count)))) /* 按索引均分角度：绕 Y 轴转到对应位置 */
+        translateZ(var(--radius)); /* 推向观察者方向：形成“绕一圈”的深度半径 */
 
-    transition: transform 0.25s ease, filter 0.25s ease;
-    -webkit-box-reflect: below 1px linear-gradient(transparent, #0002);
+    transition: transform 0.25s ease, filter 0.25s ease; /* 悬停/拖拽时的过渡更顺滑 */
+    -webkit-box-reflect: below 1px linear-gradient(transparent, #0002); /* WebKit 反射：营造倒影质感（非标准属性） */
 }
 
 .ring .item img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    border-radius: 10px;
+    width: 100%; /* 图片铺满卡片宽度 */
+    height: 100%; /* 图片铺满卡片高度 */
+    display: block; /* 去掉 img 默认的底部空隙（baseline） */
+    object-fit: cover; /* 按比例裁切填充，避免拉伸变形 */
+    border-radius: 10px; /* 圆角，让卡片更柔和 */
 }
 
 .ring .item:hover {
-    filter: drop-shadow(0 0 22px #000);
+    filter: drop-shadow(0 0 22px #000); /* 悬停阴影：让当前图片更突出 */
     transform:
-        translate(-50%, -50%)
-        rotateY(calc(var(--i) * (360deg / var(--count))))
-        translateZ(calc(var(--radius) + 20px))
-        scale(1.06);
+        translate(-50%, -50%) /* 仍然保持以中心为原点 */
+        rotateY(calc(var(--i) * (360deg / var(--count)))) /* 仍然保持在原角度位置 */
+        translateZ(calc(var(--radius) + 20px)) /* 额外向外推一点：形成“弹出” */
+        scale(1.06); /* 轻微放大：强调 hover */
 }
 
+/* 小屏：缩小半径与倾斜角，避免内容过于拥挤或超出视口 */
 @media (max-width: 520px) {
     .ring {
-        --radius: 320px;
-        --tilt: -6deg;
+        --radius: 320px; /* 小屏减小半径：避免图片超出视口 */
+        --tilt: -6deg; /* 小屏减少倾斜：降低遮挡与压迫感 */
     }
 }

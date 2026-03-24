@@ -16,18 +16,18 @@
  */
 (function initAnimatedLogin() {
   // 左侧动画舞台容器（承载所有角色 DOM）
-  const stage = document.querySelector("[data-login-stage]");
+  const stage = document.querySelector("[data-login-stage]"); // 舞台根节点：所有角色都在其内部
   // 登录表单容器（用于判断本页是否具备交互所需结构）
-  const form = document.querySelector("[data-login-form]");
+  const form = document.querySelector("[data-login-form]"); // 表单根节点：用于存在性校验
   // 用户名输入框（用于监听 focus 等）
-  const usernameInput = document.getElementById("login-username");
+  const usernameInput = document.getElementById("login-username"); // 用户名 input
   // 密码输入框（用于监听 focus/input，并决定“偷看”逻辑）
-  const passwordInput = document.getElementById("login-password");
+  const passwordInput = document.getElementById("login-password"); // 密码 input
   // 密码显示/隐藏按钮
-  const toggle = document.querySelector("[data-password-toggle]");
+  const toggle = document.querySelector("[data-password-toggle]"); // 显示/隐藏按钮
 
   // 若关键节点缺失，直接退出（避免报错影响登录逻辑）
-  if (!stage || !form || !usernameInput || !passwordInput || !toggle) return;
+  if (!stage || !form || !usernameInput || !passwordInput || !toggle) return; // 结构不完整则退出，避免报错
 
   // 无障碍：系统设置“减少动态效果”时尽量关闭动画
   const prefersReducedMotion =
@@ -35,10 +35,10 @@
 
   // 缓存角色 DOM，后续用于计算中心点、设置 transform 等
   const characters = {
-    purple: stage.querySelector('[data-character="purple"]'),
-    black: stage.querySelector('[data-character="black"]'),
-    orange: stage.querySelector('[data-character="orange"]'),
-    yellow: stage.querySelector('[data-character="yellow"]'),
+    purple: stage.querySelector('[data-character="purple"]'), // 紫色角色 DOM
+    black: stage.querySelector('[data-character="black"]'), // 黑色角色 DOM
+    orange: stage.querySelector('[data-character="orange"]'), // 橙色角色 DOM
+    yellow: stage.querySelector('[data-character="yellow"]'), // 黄色角色 DOM
   };
 
   // 收集眼睛/瞳孔元素：
@@ -50,19 +50,19 @@
   const pupilOnlyEls = Array.from(stage.querySelectorAll("[data-pupil-only]"));
 
   // 当前鼠标位置：用于“目光跟随”
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
+  let mouseX = window.innerWidth / 2; // 初始鼠标 X：默认屏幕中心
+  let mouseY = window.innerHeight / 2; // 初始鼠标 Y：默认屏幕中心
 
   // 状态机：
   // - isTyping：输入/聚焦后的短暂状态（用于角色夸张动作）
   // - showPassword：密码是否可见
   // - purplePeeking：紫色是否处于“偷看”阶段
-  let isTyping = false;
-  let showPassword = false;
-  let purplePeeking = false;
+  let isTyping = false; // 是否处于“输入脉冲”状态
+  let showPassword = false; // 密码当前是否可见
+  let purplePeeking = false; // 紫色是否处于“偷看”阶段
 
   // 工具函数：将值夹在 min/max 之间，避免过度偏移
-  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value)); // 数值夹紧工具：防止偏移过大
 
   // 将瞳孔偏移写入 CSS 变量（由 CSS 负责 transform）
   const setPupilOffset = (el, x, y) => {
@@ -264,8 +264,8 @@
   // Track mouse
   window.addEventListener("mousemove", (e) => {
     // 实时记录鼠标位置（动画帧读取）
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    mouseX = e.clientX; // 更新鼠标 x
+    mouseY = e.clientY; // 更新鼠标 y
   });
 
   // Typing interaction
@@ -289,9 +289,9 @@
 
   toggle.addEventListener("click", () => {
     // 切换密码可见性
-    showPassword = !showPassword;
+    showPassword = !showPassword; // 翻转状态位
     // 切换 input 的 type 来实现显示/隐藏
-    passwordInput.setAttribute("type", showPassword ? "text" : "password");
+    passwordInput.setAttribute("type", showPassword ? "text" : "password"); // 修改 input 类型
     // 同步按钮文案
     syncToggleLabel();
   });

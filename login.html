@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- 字符编码：避免中文乱码 -->
     <meta charset="utf-8">
+    <!-- 视口设置：移动端按设备宽度渲染 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 页面标题 -->
     <title>登录</title>
     <!--
       样式说明：
@@ -14,16 +17,33 @@
       - assets/js/login.js：登录校验，成功后写 localStorage.loggedIn 并跳转 index.html
       - assets/js/login-animated.js：左侧卡通互动（瞳孔跟随、眨眼、偷看等）
     -->
+    <!-- 表单控件样式（登录/注册复用） -->
     <link rel="stylesheet" href="assets/css/login.css">
+    <!-- 登录页专属布局/左侧舞台样式 -->
     <link rel="stylesheet" href="assets/css/login-animated.css">
+    <!-- 背景纹理/动效（body.background 生效） -->
     <link rel="stylesheet" href="assets/css/background.css">
 </head>
 <body class="background">
+    <!--
+        主体结构说明：
+        - .login-layout：整页居中
+        - .login-shell：外层分栏盒子
+        - 左侧 section.login-left：卡通舞台（纯互动装饰，不参与提交）
+        - 右侧 section.login-right：登录表单（由 login.js 处理提交）
+    -->
     <main class="login-layout" aria-label="登录页面">
         <div class="login-shell">
             <!-- 左侧：卡通舞台（纯装饰/互动，不参与表单提交） -->
             <section class="login-left" aria-hidden="true">
                 <div class="login-left__stage" data-login-stage>
+                    <!--
+                        data-login-stage：
+                        - login-animated.js 会在这个容器内 querySelector 角色/眼睛
+                        - 角色 DOM 通过 data-character 标识身份（purple/black/orange/yellow）
+                    -->
+
+                    <!-- 紫色角色：白眼球 + 瞳孔（data-pupil），支持“眨眼/跟随/偷看” -->
                     <div class="character character--purple" data-character="purple">
                         <div class="character__eyes" data-face>
                             <div class="eye" data-eye data-eye-owner="purple">
@@ -35,6 +55,7 @@
                         </div>
                     </div>
 
+                    <!-- 黑色角色：白眼球 + 瞳孔（data-pupil），动作更“克制” -->
                     <div class="character character--black" data-character="black">
                         <div class="character__eyes" data-face>
                             <div class="eye" data-eye data-eye-owner="black">
@@ -46,6 +67,7 @@
                         </div>
                     </div>
 
+                    <!-- 橙色角色：只有瞳孔点（data-pupil-only），无白眼球 -->
                     <div class="character character--orange" data-character="orange">
                         <div class="character__eyes character__eyes--pupil-only" data-face>
                             <div class="pupil-only" data-pupil-only></div>
@@ -53,6 +75,7 @@
                         </div>
                     </div>
 
+                    <!-- 黄色角色：只有瞳孔点 + 一条嘴巴装饰 -->
                     <div class="character character--yellow" data-character="yellow">
                         <div class="character__eyes character__eyes--pupil-only" data-face>
                             <div class="pupil-only" data-pupil-only></div>
@@ -76,12 +99,15 @@
 
                     <!-- 登录表单：提交后由 JS 拦截，不会真正向服务器发请求 -->
                     <form id="login-form" class="login-form" data-login-form>
+                        <!-- 用户名：login.js 读取 #login-username 做校验/聚焦 -->
                         <label class="login-label" for="login-username">用户名</label>
                         <input id="login-username" name="username" class="login-input" type="text" autocomplete="username" required>
 
+                        <!-- 密码：login.js 读取 #login-password；login-animated.js 监听 focus/input 与 show/hide -->
                         <label class="login-label" for="login-password">密码</label>
                         <div class="login-password">
                             <input id="login-password" name="password" class="login-input login-input--password" type="password" autocomplete="current-password" required>
+                            <!-- data-password-toggle：login-animated.js 用于绑定点击事件，切换密码可见性 -->
                             <button class="login-password__toggle" type="button" data-password-toggle aria-label="显示或隐藏密码">显示</button>
                         </div>
 
@@ -94,8 +120,10 @@
 
                         <p id="login-error" class="login-error" role="alert" aria-live="polite"></p>
 
+                        <!-- 提交按钮：表单 submit 后由 login.js 处理（成功跳 index.html） -->
                         <button class="login-button" type="submit">进入主页</button>
 
+                        <!-- 跳转注册页：不需要登录态 -->
                         <a class="login-register" href="register.html">没有账号？去注册</a>
                     </form>
                 </div>
@@ -104,6 +132,12 @@
     </main>
 
     <!-- 登录逻辑：校验 + 写登录态 + 跳主页 -->
+    <!--
+        登录逻辑脚本（defer）：
+        - 拦截表单提交
+        - 校验账号/密码
+        - 成功写入 localStorage.loggedIn='1' 并跳转主页
+    -->
     <script src="assets/js/login.js" defer></script>
     <!-- 卡通互动：瞳孔/眨眼/偷看等动效 -->
     <script src="assets/js/login-animated.js" defer></script>

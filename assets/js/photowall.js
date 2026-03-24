@@ -17,50 +17,50 @@
 (function () {
     function initPhotoWall() {
         // 获取照片环形容器（CSS 3D 旋转的根节点）
-        const ring = document.querySelector('[data-photowall-ring]');
+        const ring = document.querySelector('[data-photowall-ring]'); // 环形容器（CSS 变量写入目标）
         // 页面上没有照片墙时直接退出
         if (!ring) return;
 
         // 1) 统计照片数量并写入 CSS 变量
-        const items = Array.from(ring.querySelectorAll('[data-photowall-item]'));
+        const items = Array.from(ring.querySelectorAll('[data-photowall-item]')); // 收集所有照片卡片
         // 写入总数量：CSS 用它把 360° 均分成 N 份
-        ring.style.setProperty('--count', String(items.length));
+        ring.style.setProperty('--count', String(items.length)); // --count 是 CSS 计算角度的分母
         items.forEach((item, index) => {
             // 2) 为每个 item 写入索引变量 --i，CSS 负责算位置
             // index 从 0 开始：对应第 0 张、第 1 张...
-            item.style.setProperty('--i', String(index));
+            item.style.setProperty('--i', String(index)); // --i 是每张照片的索引（决定其角度位置）
         });
 
         // 拖拽相关状态
-        let isDragging = false;
-        let startX = 0;
-        let startRotation = 0;
+        let isDragging = false; // 是否处于拖拽中
+        let startX = 0; // pointerdown 时的 clientX
+        let startRotation = 0; // pointerdown 时的 rotation（起始角度）
         // 当前旋转角度（单位：deg）
-        let rotation = 0;
+        let rotation = 0; // 内部状态：与 CSS 变量 --rotation 同步
 
         const prefersReducedMotion = window.matchMedia &&
-            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches; // 无障碍：减少动态则禁用自动旋转
         // 自动旋转速度：度/毫秒（例如 0.006 => 约 6deg/s）
         const AUTO_ROTATE_DEG_PER_MS = 0.006;
 
         const setRotation = (value) => {
             // 统一入口：更新内部 rotation 并写回 CSS 变量
-            rotation = value;
+            rotation = value; // 更新内部角度状态
             // CSS 读取 --rotation 来做整体 rotateY/rotateZ 等变换
-            ring.style.setProperty('--rotation', `${rotation}deg`);
+            ring.style.setProperty('--rotation', `${rotation}deg`); // 写入 CSS 变量（单位 deg）
         };
 
         const onPointerDown = (event) => {
             // 开始拖动：记录起点与起始角度
-            isDragging = true;
+            isDragging = true; // 开始拖动
             // 给容器加 class：可用于拖动时的样式反馈（如光标/过渡）
-            ring.classList.add('is-dragging');
+            ring.classList.add('is-dragging'); // 添加拖动态 class（cursor/过渡等）
             // 记录指针起始 x
-            startX = event.clientX;
+            startX = event.clientX; // 记录起点 x
             // 记录拖动开始时的角度
-            startRotation = rotation;
+            startRotation = rotation; // 记录拖拽开始时的角度
             // 捕获指针：避免拖动过程中指针移出元素导致事件丢失
-            ring.setPointerCapture(event.pointerId);
+            ring.setPointerCapture(event.pointerId); // 捕获指针，避免移出元素导致拖拽中断
         };
 
         const onPointerMove = (event) => {
@@ -74,12 +74,12 @@
         const endDrag = (event) => {
             // 结束拖动：释放 capture，恢复自动旋转
             if (!isDragging) return;
-            isDragging = false;
+            isDragging = false; // 结束拖拽
             // 移除拖动中的样式状态
-            ring.classList.remove('is-dragging');
+            ring.classList.remove('is-dragging'); // 移除拖动态 class
             try {
                 // 释放指针捕获（不同浏览器可能抛异常，故 try/catch）
-                ring.releasePointerCapture(event.pointerId);
+                ring.releasePointerCapture(event.pointerId); // 释放捕获
             } catch (e) {
                 // ignore
             }
@@ -94,7 +94,7 @@
             let lastTime = 0;
             const tick = (now) => {
                 // requestAnimationFrame 循环：根据时间增量推进旋转
-                if (!lastTime) lastTime = now;
+                if (!lastTime) lastTime = now; // 第一帧初始化时间基准
                 // 计算本帧相对上一帧的时间差（ms）
                 const delta = now - lastTime;
                 lastTime = now;
@@ -112,7 +112,7 @@
         }
 
         // 默认稍微转一点，避免完全正面重叠
-        setRotation(-10);
+        setRotation(-10); // 初始角度：让视觉上不完全正对，减少重叠
     }
 
     // DOM ready 兼容：保证在元素存在后再初始化

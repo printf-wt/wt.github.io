@@ -7,76 +7,86 @@
     - 与主页统一的视觉（卡片背景、边框、阴影）
 */
 
+/* ===== 文章列表：卡片集合（网格，便于未来扩展多列） ===== */
 .posts {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin-top: 12px;
+    display: grid; /* 列表用 grid：便于未来扩展多列 */
+    grid-template-columns: 1fr; /* 当前为单列布局 */
+    gap: 14px; /* 卡片之间的间距 */
+    margin-top: 12px; /* 与标题/上方内容留间距 */
 }
 
+/* 单篇文章卡片（列表项容器） */
 .post {
-    background: rgba(248, 250, 255, 0.92);
-    border: 1px solid rgba(0, 0, 0, 0.10);
-    border-radius: 12px;
-    padding: 16px;
+    background: rgba(248, 250, 255, 0.92); /* 卡片背景 */
+    border: 1px solid rgba(0, 0, 0, 0.10); /* 轻边框 */
+    border-radius: 12px; /* 圆角 */
+    padding: 16px; /* 内边距 */
 }
 
+/* 文章标题 */
 .post-title {
-    margin: 0 0 6px;
-    color: #1f2330;
-    font-size: 18px;
+    margin: 0 0 6px; /* 标题与元信息的间距 */
+    color: #1f2330; /* 标题深色 */
+    font-size: 18px; /* 标题字号 */
 }
 
+/* 文章元信息：日期/作者等 */
 .post-meta {
-    margin: 0 0 10px;
-    font-size: 13px;
-    color: #55607a;
+    margin: 0 0 10px; /* 与摘要的间距 */
+    font-size: 13px; /* 元信息字号 */
+    color: #55607a; /* 元信息颜色更浅 */
 }
 
+/* 摘要：列表页用于快速预览正文 */
 .post-excerpt {
-    margin: 0;
-    color: #3c445c;
-    line-height: 1.7;
-    font-size: 14px;
+    margin: 0; /* 摘要本身不额外留白（由卡片 padding 控制） */
+    color: #3c445c; /* 正文颜色 */
+    line-height: 1.7; /* 行距 */
+    font-size: 14px; /* 摘要字号 */
 }
 
+/* 链接包裹：让整张卡片可点击 */
 .post-link {
-    color: inherit;
-    text-decoration: none;
-    display: block;
+    color: inherit; /* 继承卡片字体颜色，避免默认蓝色链接 */
+    text-decoration: none; /* 去掉下划线，让卡片更像整体可点击 */
+    display: block; /* 让 a 包裹整张卡片的点击区域 */
 }
 
 .post-link:hover .post-title {
     text-decoration: underline;
 }
 
+/* ===== 文章详情页：正文排版容器（控制最大宽度） ===== */
 .post-page {
-    width: 100%;
-    max-width: 1000px;
-    margin: 16px auto;
-    padding: 20px;
-    background: rgba(248, 250, 255, 0.94);
-    border-radius: 12px;
-    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    width: 100%; /* 详情页容器占满可用宽度 */
+    max-width: 1000px; /* 限制正文行宽，避免太宽难读 */
+    margin: 16px auto; /* 居中并与上下留间距 */
+    padding: 20px; /* 正文内边距 */
+    background: rgba(248, 250, 255, 0.94); /* 正文卡片背景 */
+    border-radius: 12px; /* 圆角 */
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14); /* 阴影提升层级 */
+    border: 1px solid rgba(0, 0, 0, 0.08); /* 轻边框 */
 }
 
+/* 详情页标题 */
 .post-page h1 {
-    margin: 0 0 8px;
-    color: #1f2330;
-    font-size: 24px;
+    margin: 0 0 8px; /* 标题与元信息间距 */
+    color: #1f2330; /* 标题颜色 */
+    font-size: 24px; /* 标题字号 */
 }
 
+/* 详情页元信息 */
 .post-page .meta {
-    margin: 0 0 16px;
-    color: #55607a;
-    font-size: 13px;
-    line-height: 1.6;
+    margin: 0 0 16px; /* 元信息与正文间距 */
+    color: #55607a; /* 元信息颜色 */
+    font-size: 13px; /* 元信息字号 */
+    line-height: 1.6; /* 行距 */
 }
 
+/* 详情页段落：行高更大，增强可读性 */
 .post-page .content p {
-    margin: 10px 0;
-    color: #3c445c;
-    line-height: 1.9;
-    font-size: 16px;
+    margin: 10px 0; /* 段落上下间距 */
+    color: #3c445c; /* 正文颜色 */
+    line-height: 1.9; /* 正文行距更大，增强阅读性 */
+    font-size: 16px; /* 正文字号 */
 }

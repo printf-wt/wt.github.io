@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- 字符编码 -->
     <meta charset="utf-8">
+    <!-- 视口设置：移动端适配 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 页面标题 -->
     <title>注册</title>
     <!--
       样式说明：
@@ -13,11 +16,20 @@
       脚本说明：
       - assets/js/register.js：本地校验后写 localStorage.registeredUser，成功跳 login.html
     -->
+    <!-- 表单通用样式（与登录页一致） -->
     <link rel="stylesheet" href="assets/css/login.css">
+    <!-- 背景纹理/动效 -->
     <link rel="stylesheet" href="assets/css/background.css">
+    <!-- 注册页特有排版（fieldset/选项） -->
     <link rel="stylesheet" href="assets/css/register.css">
 </head>
 <body class="background">
+    <!--
+        注册页结构说明：
+        - 复用 login.css 的 .login-page/.login-card/.login-form
+        - register.css 只补充注册页特有组件（fieldset/legend/协议/返回链接）
+        - 提交由 register.js 拦截并写入 localStorage.registeredUser
+    -->
     <main class="login-page">
         <div class="login-card" role="dialog" aria-modal="true" aria-labelledby="register-title">
             <h1 id="register-title" class="register-title">注册</h1>
@@ -25,18 +37,22 @@
 
             <!-- 注册表单：提交后由 JS 拦截，在浏览器 localStorage 中保存 -->
             <form id="register-form" class="login-form">
+                <!-- 账号：register.js 读取 #reg-username -->
                 <label class="login-label" for="reg-username">账号</label>
                 <input id="reg-username" name="username" class="login-input" type="text" autocomplete="username" required>
 
+                <!-- 密码：register.js 读取 #reg-password -->
                 <label class="login-label" for="reg-password">密码</label>
                 <input id="reg-password" name="password" class="login-input" type="password" autocomplete="new-password" required>
 
+                <!-- 性别：radio 必选；register.js 会校验必须选中 -->
                 <fieldset class="register-fieldset">
                     <legend class="register-legend">性别</legend>
                     <label class="register-option"><input type="radio" name="gender" value="男" required> 男</label>
                     <label class="register-option"><input type="radio" name="gender" value="女" required> 女</label>
                 </fieldset>
 
+                <!-- 兴趣爱好：checkbox 可多选；register.js 会读取已勾选的 value 数组 -->
                 <fieldset class="register-fieldset">
                     <legend class="register-legend">兴趣爱好</legend>
                     <label class="register-option"><input type="checkbox" name="hobbies" value="瓦"> 瓦</label>
@@ -45,6 +61,7 @@
                     <label class="register-option"><input type="checkbox" name="hobbies" value="CS"> CS</label>
                 </fieldset>
 
+                <!-- 协议：必须勾选才允许提交（register.js 会联动按钮 disabled） -->
                 <label class="register-agreement">
                     <input id="reg-agree" type="checkbox">
                     我已阅读并同意《用户协议》

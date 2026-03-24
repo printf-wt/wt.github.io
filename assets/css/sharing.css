@@ -6,6 +6,7 @@
     - sharing.html 是独立页面，不需要隐藏 section，因此在这里显式 display: block
 */
 
+/* sharing.html 是独立页：强制显示 #sharing 区块（不受主页 JS 控制） */
 #sharing {
-    display: block;
+    display: block; /* 覆盖主页的 section{display:none}，让分享页内容直接可见 */
 }

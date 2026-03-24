@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- 字符编码 -->
     <meta charset="utf-8" />
+    <!-- 视口设置：移动端适配 -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 页面标题 -->
     <title>照片墙</title>
         <!--
             样式说明：
@@ -19,7 +22,12 @@
     <link rel="stylesheet" href="assets/css/background.css" />
 </head>
 <body class="background">
-        <!-- 访问控制：未登录访问本页会被重定向到 login.html -->
+        <!--
+            访问控制脚本（auth.js）：
+            - 读取 localStorage.loggedIn
+            - 未登录则跳转 login.html
+            - 这是纯前端演示用，不是真正安全鉴权
+        -->
     <script src="assets/js/auth.js" defer></script>
 
     <nav id="daohang">
@@ -33,7 +41,12 @@
 
     <!-- 3D 舞台容器：photowall.css 负责 3D 布局，photowall.js 负责交互 -->
     <div class="stage">
+        <!--
+            data-photowall-ring：
+            - photowall.js 会在这个节点上写入 CSS 变量：--count / --rotation
+        -->
         <div class="ring" data-photowall-ring>
+            <!-- 每个 item 都带 data-photowall-item，photowall.js 会写入各自的 --i 索引 -->
             <div class="item" data-photowall-item>
                 <img src="assets/img/1.webp" alt="照片 1" />
             </div>

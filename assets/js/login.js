@@ -12,21 +12,21 @@
  */
 (function initLogin() {
     // 获取表单与输入框 DOM（后续用于读取用户输入与显示错误）
-    const form = document.getElementById('login-form');
-    const usernameInput = document.getElementById('login-username');
-    const passwordInput = document.getElementById('login-password');
-    const errorEl = document.getElementById('login-error');
+    const form = document.getElementById('login-form'); // 登录表单
+    const usernameInput = document.getElementById('login-username'); // 用户名输入框
+    const passwordInput = document.getElementById('login-password'); // 密码输入框
+    const errorEl = document.getElementById('login-error'); // 错误提示容器
 
     // 演示账号：当没有注册信息时，使用这组账号作为“正确答案”
-    const VALID_USERNAME = '17673680052';
-    const VALID_PASSWORD = 'wangteng20051215';
+    const VALID_USERNAME = '17673680052'; // 演示用默认账号
+    const VALID_PASSWORD = 'wangteng20051215'; // 演示用默认密码
     // localStorage 中保存注册信息的 key（注册页写入，登录页读取）
-    const STORAGE_KEY = 'registeredUser';
+    const STORAGE_KEY = 'registeredUser'; // 注册信息在 localStorage 中的键名
 
     function setError(message) {
         // 统一的错误展示出口：避免到处直接操作 DOM
         // message 为空时清空错误提示
-        errorEl.textContent = message || '';
+        errorEl.textContent = message || ''; // 直接写 textContent：避免 XSS 与 HTML 注入
     }
 
     function getRegisteredUser() {
@@ -50,25 +50,25 @@
 
     form.addEventListener('submit', (e) => {
         // 拦截默认提交（静态站点不需要真正提交到服务器）
-        e.preventDefault();
+        e.preventDefault(); // 静态页不提交到服务器，全部在前端处理
         // 提交前先清空错误
-        setError('');
+        setError(''); // 清空旧错误
 
         // 读取并规范化用户输入
-        const username = usernameInput.value.trim();
-        const password = passwordInput.value;
+        const username = usernameInput.value.trim(); // trim：去掉用户不小心输入的空格
+        const password = passwordInput.value; // 密码不 trim：保留用户输入原样
 
         if (!username || !password) {
             // 基础校验：必填
-            setError('请输入用户名和密码');
+            setError('请输入用户名和密码'); // 统一提示必填
             return;
         }
 
         // 决定“正确账号”来自哪里：注册用户优先，否则用演示账号
-        const registered = getRegisteredUser();
+        const registered = getRegisteredUser(); // 读取已注册账号（若存在）
         // 期望的用户名/密码（用于对比）
-        const expectedUsername = registered ? registered.username : VALID_USERNAME;
-        const expectedPassword = registered ? registered.password : VALID_PASSWORD;
+        const expectedUsername = registered ? registered.username : VALID_USERNAME; // 期望用户名
+        const expectedPassword = registered ? registered.password : VALID_PASSWORD; // 期望密码
 
         if (username !== expectedUsername || password !== expectedPassword) {
             // 对比失败：提示并清空密码
@@ -91,5 +91,5 @@
     });
 
     // 默认聚焦用户名输入框，提升可用性
-    usernameInput.focus();
+    usernameInput.focus(); // 首次进入把光标放到用户名，减少一次点击
 })();

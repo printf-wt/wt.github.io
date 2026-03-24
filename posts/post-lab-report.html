@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- 字符编码 -->
     <meta charset="utf-8">
+    <!-- 视口设置 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 页面标题 -->
     <title>学习笔记：如何高效写实验报告</title>
         <!--
             样式说明：
@@ -18,6 +21,7 @@
     <link rel="stylesheet" href="../assets/css/posts.css">
 </head>
 <body class="background">
+    <!-- 导航：与另一篇文章页一致，使用 ../ 前缀跳回主页/其它页面 -->
     <nav id="daohang">
         <a href="../index.html#education">学历信息</a>
         <a href="../index.html#awards">获奖经历</a>
@@ -27,14 +31,16 @@
         <a href="../photowall.html" target="_self">照片墙</a>
     </nav>
 
-    <!-- 文章正文区域 -->
+    <!-- 文章正文区域：包含标题、meta 与正文 content -->
     <main class="post-page">
         <h1>C++中cin.get(),cin.getline()和getline(cin, string&)的区别</h1>
         <p class="meta">时间：2026-03-21｜关键词：C++ / 输入输出</p>
 
+        <!-- content：正文内容容器（此篇包含 ul/li 列表） -->
         <div class="content">
             <p>在C++中，cin.get()、cin.getline()和getline(cin, string&)都是用于输入的函数，但它们有不同的用途和行为：</p>
             <ul>
+                <!-- 列表项：用 <strong> 强调关键 API 名称 -->
                 <li><strong>cin.get()</strong>：这个函数用于从输入流中读取一个字符。它会读取下一个字符，包括空格和换行符。使用cin.get()时，如果输入的是一个换行符，它会被保留在输入缓冲区中。</li>
                 <li><strong>cin.getline()</strong>：这个函数用于从输入流中读取一行文本，直到遇到换行符为止。它会将读取的文本存储在一个字符数组中，并自动添加一个空字符（'\0'）来标记字符串的结束。使用cin.getline()时，换行符会被丢弃，不会保留在输入缓冲区中。</li>
                 <li><strong>getline(cin, string&)</strong>：这是C++标准库中的一个函数，用于从输入流中读取一行文本，并将其存储在一个std::string对象中。与cin.getline()类似，getline(cin, string&)也会丢弃换行符，并且不需要预先定义字符数组的大小，因为std::string会自动调整大小以适应输入的文本。</li>
@@ -43,7 +49,7 @@
         </div>
     </main>
 
-    <!-- 访问控制：未登录访问本页会被重定向到登录页 -->
+    <!-- 访问控制：未登录访问本页会被重定向到登录页（../login.html） -->
     <script src="../assets/js/auth.js" defer></script>
 </body>
 </html>
